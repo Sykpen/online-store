@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 
 class Main extends Component {
-    render() {
-      return (
-        <p>Начало положено</p>
-      );
-    }
+  render() {
+    return <p>Начало положено</p>;
   }
-  
-  export default Main;
+}
+
+export default Main;
