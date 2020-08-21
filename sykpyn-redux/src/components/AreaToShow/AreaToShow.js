@@ -1,16 +1,26 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
+import OneProduct from "../OneProduct/OneProduct";
 
-const AreaToShow = ({ myInfo }) => {
-  if (!myInfo.length) {
+const AreaToShow = ({ myName, myProducts }) => {
+  if (myName === null) {
     return <div>Информация появится по клику</div>;
   }
-  return <div>{myInfo}</div>;
+  return myProducts.map((product) => (
+    <OneProduct
+      name={product.name}
+      title={product.title}
+      price={product.price}
+      amount={product.amount}
+      key={product.id}
+    />
+  ));
 };
 
 const mapStateToProps = (state) => {
   return {
-    myInfo: state.showInfo.info,
+    myName: state.showInfo.name,
+    myProducts: state.showInfo.products,
   };
 };
 

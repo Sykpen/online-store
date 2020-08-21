@@ -1,3 +1,3 @@
-import { SHOW_INFO } from "../constants/constants";
+import { SHOW_INFO } from "../constants";
 
 export const showInfo = () => ({ type: SHOW_INFO });
