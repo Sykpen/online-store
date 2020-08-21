@@ -4,7 +4,7 @@ const initialState = {
   info: [],
 };
 
-export const infoShowReduser = (state = initialState, action) => {
+export const infoShowReducer = (state = initialState, action) => {
   switch (action.type) {
     case SHOW_INFO:
       return { ...state, info: "КУ_КУ" };

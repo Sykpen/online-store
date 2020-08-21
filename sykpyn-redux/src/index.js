@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Main from "./components/Main/Main";
-import AreaToShow from "./components/AreaToShow/AreaToShow";
+import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
 import { createStore, compose } from "redux";
-import { rootReduser } from "./redusers/rootReduser";
+import { rootReducer } from "./reducers/rootReducer";
 
 const store = createStore(
-  rootReduser,
+  rootReducer,
   compose(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
@@ -18,7 +18,6 @@ ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <Main />
-      <AreaToShow />
     </React.StrictMode>
   </Provider>,
   document.getElementById("root")

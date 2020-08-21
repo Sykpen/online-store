@@ -1,7 +1,3 @@
 import { SHOW_INFO } from "../constants/constants";
 
-export function showInfo() {
-  return {
-    type: SHOW_INFO,
-  };
-}
+export const showInfo = () => ({ type: SHOW_INFO });
