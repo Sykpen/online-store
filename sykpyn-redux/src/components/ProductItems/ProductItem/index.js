@@ -4,7 +4,15 @@ import { addToCart, addAllToCart } from "../../../actions";
 
 class ProductItem extends Component {
   render() {
-    const { title, price, amount, id, addToCart, addAllToCart } = this.props;
+    const {
+      title,
+      price,
+      amount,
+      id,
+      addToCart,
+      addAllToCart,
+      disableButton,
+    } = this.props;
 
     return (
       <Fragment>
@@ -12,12 +20,17 @@ class ProductItem extends Component {
           <div>
             {title} : стоит {price} рублей можно купить {amount} килограмм.
           </div>
-          <button className="btn btn-success" onClick={() => addToCart(id)}>
+          <button
+            className="btn btn-success"
+            onClick={() => addToCart(id)}
+            disabled={disableButton}
+          >
             В корзину
           </button>
           <button
             className="btn btn-success ml-3"
             onClick={() => addAllToCart(id)}
+            disabled={disableButton}
           >
             Добавить все
           </button>
@@ -26,10 +39,13 @@ class ProductItem extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  disableButton: state.showInfo.disableButton,
+});
 
 const mapDispatchToProps = {
   addToCart,
   addAllToCart,
 };
 
-export default connect(null, mapDispatchToProps)(ProductItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductItem);
