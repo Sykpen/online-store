@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { addToCart } from "../../../actions";
+import { addToCart, addAllToCart } from "../../../actions";
 
 class ProductItem extends Component {
   render() {
-    const { title, price, amount, id, addToCart } = this.props;
+    const { title, price, amount, id, addToCart, addAllToCart } = this.props;
 
     return (
       <Fragment>
@@ -15,6 +15,12 @@ class ProductItem extends Component {
           <button className="btn btn-success" onClick={() => addToCart(id)}>
             В корзину
           </button>
+          <button
+            className="btn btn-success ml-3"
+            onClick={() => addAllToCart(id)}
+          >
+            Добавить все
+          </button>
         </div>
       </Fragment>
     );
@@ -23,6 +29,7 @@ class ProductItem extends Component {
 
 const mapDispatchToProps = {
   addToCart,
+  addAllToCart,
 };
 
 export default connect(null, mapDispatchToProps)(ProductItem);
