@@ -1,16 +1,21 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { showInfo } from "../../actions/actions";
-import AreaToShow from "../AreaToShow/AreaToShow";
+import { showInfo } from "../../actions";
+import ProductItems from "../ProductItems";
+import Cart from "./Cart";
 
 class Main extends Component {
   render() {
+    const { showInfo } = this.props;
     return (
       <Fragment>
-        <button className="btn btn-primary" onClick={this.props.showInfo}>
-          Показать инфу
-        </button>
-        <AreaToShow />
+        <div className="container pt-3">
+          <button className="btn btn-primary" onClick={() => showInfo()}>
+            Показать инфу
+          </button>
+          <ProductItems />
+          <Cart />
+        </div>
       </Fragment>
     );
   }
