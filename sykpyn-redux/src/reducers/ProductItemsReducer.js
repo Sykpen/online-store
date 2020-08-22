@@ -14,6 +14,13 @@ const initialState = {
 };
 
 const defaultProduct = Immutable(products);
+let defaulProductsMutible;
+
+const makeMakedefaultProductCopy = () => {
+  return (defaulProductsMutible = Immutable.asMutable(defaultProduct, {
+    deep: true,
+  }));
+};
 
 export const ProductItemsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -49,7 +56,7 @@ export const ProductItemsReducer = (state = initialState, action) => {
       return {
         ...state,
         totalPrice: 0,
-        products: defaultProduct,
+        products: makeMakedefaultProductCopy(),
       };
     default:
       return state;
