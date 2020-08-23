@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import ProductItem from "./ProductItem";
+import ProductItem from "./ProductItemContainer";
 
-const ProductItems = ({ storeProducts }) => {
-  if (!storeProducts) {
+const ProductItems = ({ products }) => {
+  if (!products) {
     return <div>Информация появится по клику</div>;
   }
-  return storeProducts.map((product) => (
+  return products.map((product) => (
     <ProductItem
       name={product.name}
       title={product.title}
@@ -19,7 +19,7 @@ const ProductItems = ({ storeProducts }) => {
 };
 
 const mapStateToProps = (state) => ({
-  storeProducts: state.productItems.products,
+  products: state.productItems.products,
 });
 
 export default connect(mapStateToProps, null)(ProductItems);

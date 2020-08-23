@@ -13,23 +13,27 @@ class ProductItem extends Component {
       addAllProductItemsToCart,
     } = this.props;
 
+    const isProductEnded = () => {
+      return this.props.amount === 0;
+    };
+
     return (
       <Fragment>
         <div>
           <div>
-            {title} : стоит {price} рублей можно купить {amount} килограмм.
+            {title} : стоит {price} рублей можно купить {amount} штук.
           </div>
           <button
             className="btn btn-success"
             onClick={() => addToCart(id)}
-            disabled={amount === 0}
+            disabled={isProductEnded()}
           >
             В корзину
           </button>
           <button
             className="btn btn-success ml-3"
             onClick={() => addAllProductItemsToCart(id)}
-            disabled={amount === 0}
+            disabled={isProductEnded()}
           >
             Добавить все
           </button>

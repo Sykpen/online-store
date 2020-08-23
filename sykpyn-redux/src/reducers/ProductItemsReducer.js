@@ -12,11 +12,11 @@ const initialState = {
   totalPrice: 0,
 };
 
-const defaultProduct = Immutable(products);
+const defaultProducts = Immutable(products);
 let defaulProductsMutable;
 
-const makeMakedefaultProductCopy = () => {
-  return (defaulProductsMutable = Immutable.asMutable(defaultProduct, {
+const makeDefaultProductCopy = () => {
+  return (defaulProductsMutable = Immutable.asMutable(defaultProducts, {
     deep: true,
   }));
 };
@@ -26,18 +26,23 @@ export const ProductItemsReducer = (state = initialState, action) => {
     case SHOW_INFO:
       return { ...state, products: products };
     case ADD_TO_CART:
-      state.products[action.productID - 1].amount -= 1;
-      let amounToPay = state.products[action.productID - 1].price;
+      let oneCurrentChosenProduct = state.products.filter(
+        (product) => product.id === action.productID
+      )[0];
+      oneCurrentChosenProduct.amount -= 1;
+      let amounToPay = oneCurrentChosenProduct.price;
       return {
         ...state,
         totalPrice: state.totalPrice + amounToPay,
         products: [...state.products],
       };
     case ADD_ALL_PRODUCT_ITEMS_TO_CART:
+      let currentChosenProduct = state.products.filter(
+        (product) => product.id === action.productID
+      )[0];
       let totalPriceForOneProduct =
-        state.products[action.productID - 1].price *
-        state.products[action.productID - 1].amount;
-      state.products[action.productID - 1].amount = 0;
+        currentChosenProduct.price * currentChosenProduct.amount;
+      currentChosenProduct.amount = 0;
       return {
         ...state,
         totalPrice: state.totalPrice + totalPriceForOneProduct,
@@ -47,7 +52,7 @@ export const ProductItemsReducer = (state = initialState, action) => {
       return {
         ...state,
         totalPrice: 0,
-        products: state.products ? makeMakedefaultProductCopy() : null,
+        products: state.products ? makeDefaultProductCopy() : null,
       };
     default:
       return state;
