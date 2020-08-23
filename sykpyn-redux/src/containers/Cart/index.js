@@ -1,17 +1,19 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { removeAllFromCart } from "../../../actions";
+import { cleanCart } from "../../actions/index";
 
 class Cart extends Component {
   render() {
-    const { totalPrice, removeAllFromCart } = this.props;
+    const { totalPrice, cleanCart } = this.props;
     return (
       <Fragment>
         <div>
           <p>Корзина</p>
           {totalPrice}
         </div>
-        <button className='btn btn-danger' onClick={() => removeAllFromCart()}>Remove All</button>
+        <button className="btn btn-danger" onClick={() => cleanCart()}>
+          Remove All
+        </button>
       </Fragment>
     );
   }
@@ -24,7 +26,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  removeAllFromCart
+  cleanCart,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

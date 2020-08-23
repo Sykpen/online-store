@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { addToCart, addAllToCart } from "../../../actions";
+import { addToCart, addAllProductItemsToCart } from "../../../actions";
 
 class ProductItem extends Component {
   render() {
@@ -10,8 +10,7 @@ class ProductItem extends Component {
       amount,
       id,
       addToCart,
-      addAllToCart,
-      disableButton,
+      addAllProductItemsToCart,
     } = this.props;
 
     return (
@@ -23,14 +22,14 @@ class ProductItem extends Component {
           <button
             className="btn btn-success"
             onClick={() => addToCart(id)}
-            disabled={disableButton}
+            disabled={amount === 0}
           >
             В корзину
           </button>
           <button
             className="btn btn-success ml-3"
-            onClick={() => addAllToCart(id)}
-            disabled={disableButton}
+            onClick={() => addAllProductItemsToCart(id)}
+            disabled={amount === 0}
           >
             Добавить все
           </button>
@@ -39,13 +38,10 @@ class ProductItem extends Component {
     );
   }
 }
-const mapStateToProps = (state) => ({
-  disableButton: state.showInfo.disableButton,
-});
 
 const mapDispatchToProps = {
   addToCart,
-  addAllToCart,
+  addAllProductItemsToCart,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductItem);
+export default connect(null, mapDispatchToProps)(ProductItem);
