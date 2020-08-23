@@ -22,13 +22,12 @@ const makeMakedefaultProductCopy = () => {
 };
 
 export const ProductItemsReducer = (state = initialState, action) => {
-  console.log(state)
   switch (action.type) {
     case SHOW_INFO:
       return { ...state, products: products };
     case ADD_TO_CART:
-      state.products[action.id - 1].amount -= 1;
-      let amounToPay = state.products[action.id - 1].price;
+      state.products[action.productID - 1].amount -= 1;
+      let amounToPay = state.products[action.productID - 1].price;
       return {
         ...state,
         totalPrice: state.totalPrice + amounToPay,
@@ -36,9 +35,9 @@ export const ProductItemsReducer = (state = initialState, action) => {
       };
     case ADD_ALL_PRODUCT_ITEMS_TO_CART:
       let totalPriceForOneProduct =
-        state.products[action.id - 1].price *
-        state.products[action.id - 1].amount;
-      state.products[action.id - 1].amount = 0;
+        state.products[action.productID - 1].price *
+        state.products[action.productID - 1].amount;
+      state.products[action.productID - 1].amount = 0;
       return {
         ...state,
         totalPrice: state.totalPrice + totalPriceForOneProduct,

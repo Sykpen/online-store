@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { showInfo } from "../../actions";
-import ProductItems from "../ProductItems";
-import Cart from "../../containers/Cart";
+import ProductItems from "../../containers/ProductItems";
+import Cart from "../../containers/CartContainer";
 
 class Main extends Component {
   render() {
