@@ -26,11 +26,11 @@ export const ProductItemsReducer = (state = initialState, action) => {
     case SHOW_INFO:
       return { ...state, products: products };
     case ADD_TO_CART:
-      let oneCurrentChosenProduct = state.products.filter(
+      let chosenProduct = state.products.filter(
         (product) => product.id === action.productID
       )[0];
-      oneCurrentChosenProduct.amount -= 1;
-      let amounToPay = oneCurrentChosenProduct.price;
+      chosenProduct.amount -= 1;
+      let amounToPay = chosenProduct.price;
       return {
         ...state,
         totalPrice: state.totalPrice + amounToPay,
