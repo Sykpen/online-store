@@ -1,15 +1,19 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import { cleanCart } from "../../actions/index";
 
 class Cart extends Component {
   render() {
-    const { totalPrice } = this.props;
+    const { totalPrice, cleanCart } = this.props;
     return (
       <Fragment>
         <div>
           <p>Корзина</p>
           {totalPrice}
         </div>
+        <button className="btn btn-danger" onClick={() => cleanCart()}>
+          Remove All
+        </button>
       </Fragment>
     );
   }
@@ -21,4 +25,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = {
+  cleanCart,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

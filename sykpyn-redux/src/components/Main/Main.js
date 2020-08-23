@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { showInfo } from "../../actions";
 import ProductItems from "../ProductItems";
-import Cart from "./Cart";
+import Cart from "../../containers/Cart";
 
 class Main extends Component {
   render() {
