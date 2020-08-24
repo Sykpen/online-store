@@ -3,8 +3,14 @@ import ProductItems from "../ProductItemsContainer";
 import Cart from "../CartContainer";
 import Header from "../../components/Header";
 import Slider from "../../components/Slider";
+import { connect } from "react-redux";
+import { showProducts } from "../../actions";
 
 class Main extends Component {
+  componentDidMount() {
+    return this.props.showProducts();
+  }
+
   render() {
     return (
       <Fragment>
@@ -21,4 +27,8 @@ class Main extends Component {
   }
 }
 
-export default Main;
+const mapDispatchToProps = {
+  showProducts,
+};
+
+export default connect(null, mapDispatchToProps)(Main);

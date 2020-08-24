@@ -1,12 +1,9 @@
-import {
-  ADD_TO_CART,
-  CLEAN_CART,
-} from "../constants";
+import { ADD_TO_CART, CLEAN_CART, SHOW_PRODUCTS } from "../constants";
 import { products } from "../api/products";
 import Immutable from "seamless-immutable";
 
 const initialState = {
-  products: products,
+  products: null,
   totalPrice: 0,
 };
 
@@ -37,6 +34,11 @@ export const ProductItemsReducer = (state = initialState, action) => {
         ...state,
         totalPrice: 0,
         products: state.products ? makeDefaultProductCopy() : null,
+      };
+    case SHOW_PRODUCTS:
+      return {
+        ...state,
+        products: products,
       };
     default:
       return state;

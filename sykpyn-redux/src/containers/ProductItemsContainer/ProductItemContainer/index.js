@@ -5,21 +5,14 @@ import { Card, Button } from "react-bootstrap";
 
 class ProductItem extends Component {
   render() {
-    const {
-      title,
-      price,
-      amount,
-      id,
-      addToCart,
-      image,
-    } = this.props;
+    const { title, price, amount, id, addToCart, image } = this.props;
 
     const isProductEnded = () => {
       return this.props.amount === 0;
     };
 
     return (
-      <Card style={{ width: "18rem", marginTop: '10px' }} >
+      <Card style={{ width: "18rem", marginTop: "10px" }}>
         <Card.Img variant="top" src={image} />
         <Card.Body>
           <Card.Title>{title}</Card.Title>

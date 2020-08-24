@@ -4,7 +4,7 @@ import ProductItem from "./ProductItemContainer";
 
 const ProductItems = ({ products }) => {
   if (!products) {
-    return <div>Информация появится по клику</div>;
+    return <div>Информации пока нет, перезагрузите сайт.</div>;
   }
   return products.map((product) => (
     <ProductItem
