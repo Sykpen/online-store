@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addToCart, addAllProductItemsToCart } from "../../../actions";
+import { addToCart } from "../../../actions";
+import { Card, Button } from "react-bootstrap";
 
 class ProductItem extends Component {
   render() {
@@ -10,7 +11,7 @@ class ProductItem extends Component {
       amount,
       id,
       addToCart,
-      addAllProductItemsToCart,
+      image,
     } = this.props;
 
     const isProductEnded = () => {
@@ -18,34 +19,29 @@ class ProductItem extends Component {
     };
 
     return (
-      <Fragment>
-        <div>
-          <div>
-            {title} : стоит {price} рублей можно купить {amount} штук.
-          </div>
-          <button
+      <Card style={{ width: "18rem", marginTop: '10px' }} >
+        <Card.Img variant="top" src={image} />
+        <Card.Body>
+          <Card.Title>{title}</Card.Title>
+          <Card.Text>
+            {`Изысканая пицца по доступной цене. Всего ${price} рублей. Успей купить. Предложение ограничено (осталось ${amount} штук).`}
+          </Card.Text>
+          <Button
+            variant="primary"
             className="btn btn-success"
             onClick={() => addToCart(id)}
             disabled={isProductEnded()}
           >
-            В корзину
-          </button>
-          <button
-            className="btn btn-success ml-3"
-            onClick={() => addAllProductItemsToCart(id)}
-            disabled={isProductEnded()}
-          >
-            Добавить все
-          </button>
-        </div>
-      </Fragment>
+            Добавить в корзину
+          </Button>
+        </Card.Body>
+      </Card>
     );
   }
 }
 
 const mapDispatchToProps = {
   addToCart,
-  addAllProductItemsToCart,
 };
 
 export default connect(null, mapDispatchToProps)(ProductItem);

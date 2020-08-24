@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Main from "./components/Main/Main";
+import Main from "./containers/MainContainer/Main";
 import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
 import { createStore, compose } from "redux";
