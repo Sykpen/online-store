@@ -16,11 +16,13 @@ class Main extends Component {
       <Fragment>
         <Header />
         <Slider />
-        <div className="container pt-3">
+        <div className="container pt-3 d-flex">
           <div className="d-flex justify-content-around align-items-center flex-wrap">
             <ProductItems />
           </div>
-          <Cart />
+          <div className="flex-shrink-0">
+            <Cart />
+          </div>
         </div>
       </Fragment>
     );
