@@ -1,0 +1,12 @@
+.cart_main {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 20px;
+  width: 380px;
+  align-content: center;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.remove_all {
+  margin-top: 10px;
+}

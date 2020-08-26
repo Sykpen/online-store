@@ -1,0 +1,16 @@
+.buttons {
+  border-bottom: 1px solid #ededed;
+  padding-bottom: 10px;
+}
+
+.addOneMore {
+  margin-right: 7px;
+}
+
+.deleteOne {
+  margin-left: 7px;
+}
+
+.catItem_text {
+  padding-top: 7px;
+}
