@@ -1,0 +1,17 @@
+.formContainer {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.contactsFlex {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.flexItem {
+  flex-basis: 50%;
+  flex-grow: 0;
+}
