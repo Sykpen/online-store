@@ -4,3 +4,4 @@ export const SHOW_PRODUCTS = "SHOW_PRODUCTS";
 export const ADD_ONE_MORE = "ADD_ONE_MORE";
 export const DELETE_ONE_PRODUCT = "DELETE_ONE_PRODUCT";
 export const REMOVE_CHOSEN_TYPE = "REMOVE_CHOSEN_TYPE";
+export const FILTER = "FILTER"

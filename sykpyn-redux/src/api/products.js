@@ -5,6 +5,7 @@ export const products = [
     price: 50,
     amount: 5,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
+    type: "withMeat",
   },
   {
     id: "a25fdb45-078c-4b1e-9cc7-a15f893f718f",
@@ -12,6 +13,7 @@ export const products = [
     price: 70,
     amount: 10,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
+    type: "withMeat",
   },
   {
     id: "93d7fb51-dc63-432e-ac02-55d55aa09b2e",
@@ -19,6 +21,7 @@ export const products = [
     price: 80,
     amount: 15,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
+    type: "vegetarian",
   },
   {
     id: "f98a7ca2-6265-48a3-945a-2a583cfd4aab",
@@ -26,6 +29,7 @@ export const products = [
     price: 90,
     amount: 20,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
+    type: "vegetarian",
   },
   {
     id: "8eb5fc97-2c9a-4576-8779-68122b0aa1ee",
@@ -33,6 +37,7 @@ export const products = [
     price: 100,
     amount: 25,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
+    type: "spacy",
   },
   {
     id: "3e305534-5b78-4042-be22-995dd593f06d",
@@ -40,6 +45,7 @@ export const products = [
     price: 50,
     amount: 5,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
+    type: "spacy",
   },
   {
     id: "aed1812c-6579-421d-bc87-9eba354b41b1",
@@ -47,6 +53,7 @@ export const products = [
     price: 70,
     amount: 10,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
+    type: "spacy",
   },
   {
     id: "ee6e3d47-7061-46ca-9153-a26f9a8f9cfc",
@@ -54,6 +61,7 @@ export const products = [
     price: 80,
     amount: 15,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
+    type: "sales",
   },
   {
     id: "87dd63e9-8d9f-4a0e-8f82-778f9087ad9d",
@@ -61,6 +69,7 @@ export const products = [
     price: 90,
     amount: 20,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
+    type: "sales",
   },
   {
     id: "e20c53cc-11bf-43e8-94af-33e4e017880b",
@@ -68,6 +77,7 @@ export const products = [
     price: 100,
     amount: 25,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
+    type: "sales",
   },
   {
     id: "3ebb6f04-0dc3-4786-bf5b-57b168cf753d",
@@ -75,6 +85,7 @@ export const products = [
     price: 90,
     amount: 20,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
+    type: "hit",
   },
   {
     id: "649703c5-f8cd-4f7a-9d41-d0f69ebcab3f",
@@ -82,5 +93,6 @@ export const products = [
     price: 100,
     amount: 25,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
+    type: "hit",
   },
 ];

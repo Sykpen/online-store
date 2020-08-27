@@ -5,6 +5,7 @@ import {
   ADD_ONE_MORE,
   DELETE_ONE_PRODUCT,
   REMOVE_CHOSEN_TYPE,
+  FILTER,
 } from "../constants";
 import { products } from "../api/products";
 import Immutable from "seamless-immutable";
@@ -87,6 +88,14 @@ export const ProductItemsReducer = (state = initialState, action) => {
         totalPrice: 0,
         products: state.products ? makeDefaultProductCopy() : null,
         productsAddedToCart: [],
+      };
+    case FILTER:
+      let filterProducts = products.filter(
+        (product) => product.type === action.productType
+      );
+      return {
+        ...state,
+        products: [...filterProducts],
       };
     case SHOW_PRODUCTS:
       return {
