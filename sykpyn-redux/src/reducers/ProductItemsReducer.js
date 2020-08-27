@@ -74,7 +74,7 @@ export const ProductItemsReducer = (state = initialState, action) => {
       };
     case REMOVE_CHOSEN_TYPE:
       let filtered = state.productsAddedToCart.filter(
-        (el) => el.id !== action.productID
+        (product) => product.id !== action.productID
       );
       return {
         ...state,

@@ -15,7 +15,7 @@ class Main extends Component {
     return (
       <Fragment>
         <Header />
-        {/* <Slider /> */}
+        <Slider />
         <div className="container pt-3 d-flex">
           <div className="d-flex justify-content-around align-items-center flex-wrap">
             <ProductItems />

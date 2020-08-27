@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { cleanCart } from "../../actions/index";
+import { cleanCart, addOneMore, deleteOneProduct, removeChosenType } from "../../actions/index";
 import CartItem from "../../components/CartItem";
 import "./cart.css";
 
 class Cart extends Component {
   render() {
-    const { cleanCart, productsAddedToCart, showCart } = this.props;
+    const { cleanCart, productsAddedToCart, showCart, addOneMore, deleteOneProduct, removeChosenType } = this.props;
     return (
       <Fragment>
         <div className="cart_main">
@@ -23,12 +23,11 @@ class Cart extends Component {
           {showCart
             ? productsAddedToCart.map((product) => (
                 <CartItem
-                  productPrice={product.price}
-                  chosenProductTitle={product.title}
-                  amountToOrder={product.totalAmountToOrder}
-                  totalPrice={product.totalPriceForOneProduct}
                   id={product.id}
-                  productAmount={product.amount}
+                  product={product}
+                  addOneMore={addOneMore}
+                  deleteOneProduct={deleteOneProduct}
+                  removeChosenType={removeChosenType}
                 />
               ))
             : "Заказов пока нет!"}
@@ -53,6 +52,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   cleanCart,
+  addOneMore,
+  deleteOneProduct,
+  removeChosenType,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
