@@ -20,4 +20,4 @@ export const removeChosenType = (id) => ({
   type: REMOVE_CHOSEN_TYPE,
   productID: id,
 });
-export const filter = (productType) => ({ type: FILTER, productType });
+export const filter = (filterProductTypes) => ({ type: FILTER, filterProductTypes });

@@ -1,0 +1,18 @@
+{
+    "header" : {
+        "sales" : "sales1",
+        "contacts" : "contacts"
+    },
+    "filterBlock" : {
+        "all":"all",
+        "withMeat":"withMeat",
+        "vegetarian":"vegetarian",
+        "hot":"hot",
+        "hit":"hit"
+    },
+    "cart": {
+        "cart":"cart",
+        "noOrders":"noOrders!"
+    },
+    "cardText":"cardTextcardTextcardTextcardTextcardTextcardTextcardText"
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Main from "./containers/MainContainer/Main";
@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
 import { createStore, compose } from "redux";
 import { rootReducer } from "./reducers/rootReducer";
+import "./i18n";
 
 const store = createStore(
   rootReducer,
@@ -15,10 +16,12 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <Main />
-    </React.StrictMode>
-  </Provider>,
+  <Suspense fallback={<div>Loading...</div>}>
+    <Provider store={store}>
+      <React.StrictMode>
+        <Main />
+      </React.StrictMode>
+    </Provider>
+  </Suspense>,
   document.getElementById("root")
 );

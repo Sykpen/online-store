@@ -18,6 +18,10 @@ const initialState = {
   chosenProduct: null,
 };
 
+// const filterTypes =[
+//   "withMeat", "vegetarian", "spacy", "sales", "hit", "withCheese",
+// ]
+
 const defaultProducts = Immutable(products);
 let defaulProductsMutable;
 
@@ -90,9 +94,14 @@ export const ProductItemsReducer = (state = initialState, action) => {
         productsAddedToCart: [],
       };
     case FILTER:
-      let filterProducts = products.filter(
-        (product) => product.type === action.productType
+      console.log(products[0].type);
+      // let filterProducts = products.filter(
+      //   (product) => product.type === action.filterProductTypes
+      // );
+      let filterProducts = products.filter((product) =>
+        product.type.includes(action.filterProductTypes)
       );
+      console.log(filterProducts);
       return {
         ...state,
         products: [...filterProducts],
