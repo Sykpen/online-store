@@ -16,7 +16,7 @@ class CartItem extends Component {
       return product.amount === 0;
     };
 
-    const decreaseProductAmount = () => {
+    const canProductAmountDecrease = () => {
       return product.totalAmountToOrder <= 1;
     };
 
@@ -48,7 +48,7 @@ class CartItem extends Component {
               variant="primary"
               className="btn btn-warning deleteOne"
               onClick={() => deleteOneProduct(id)}
-              disabled={decreaseProductAmount()}
+              disabled={canProductAmountDecrease()}
             >
               -
             </Button>

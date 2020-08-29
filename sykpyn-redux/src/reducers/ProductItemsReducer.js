@@ -2,7 +2,7 @@ import {
   ADD_TO_CART,
   CLEAN_CART,
   SHOW_PRODUCTS,
-  ADD_ONE_MORE,
+  ADD_ONE_PRODUCT,
   DELETE_ONE_PRODUCT,
   REMOVE_CHOSEN_TYPE,
 } from "../constants";
@@ -52,7 +52,7 @@ export const ProductItemsReducer = (state = initialState, action) => {
         showCart: true,
         chosenProduct: chosenProduct,
       };
-    case ADD_ONE_MORE:
+    case ADD_ONE_PRODUCT:
       state.chosenProduct.totalAmountToOrder++;
       state.chosenProduct.totalPriceForOneProduct =
         state.chosenProduct.price * state.chosenProduct.totalAmountToOrder;
