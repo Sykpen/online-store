@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { Navbar, Button, Nav, Form, FormControl } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   render() {
     return (
       <Navbar bg="light" variant="light">
-        <Navbar.Brand href="#home">LOGO</Navbar.Brand>
+        <Navbar.Brand to="/home">LOGO</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link href="#sales">Акции</Nav.Link>
-          <Nav.Link href="#contacts">Контакты</Nav.Link>
-          <Nav.Link href="#aboutUS">О нас</Nav.Link>
+          <Link to="/">Главная</Link>
+          <Link to="/contacts">Контакты</Link>
         </Nav>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
