@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { cleanCart, addOneMore, deleteOneProduct, removeChosenType } from "../../actions/index";
+import { cleanCart, addOneProduct, deleteOneProduct, removeChosenType } from "../../actions/index";
 import CartItem from "../../components/CartItem";
 import "./cart.css";
 
 class Cart extends Component {
   render() {
-    const { cleanCart, productsAddedToCart, showCart, addOneMore, deleteOneProduct, removeChosenType } = this.props;
+    const { cleanCart, productsAddedToCart, showCart, addOneProduct, deleteOneProduct, removeChosenType } = this.props;
     return (
       <Fragment>
         <div className="cart_main">
@@ -25,7 +25,7 @@ class Cart extends Component {
                 <CartItem
                   id={product.id}
                   product={product}
-                  addOneMore={addOneMore}
+                  addOneProduct={addOneProduct}
                   deleteOneProduct={deleteOneProduct}
                   removeChosenType={removeChosenType}
                 />
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   cleanCart,
-  addOneMore,
+  addOneProduct,
   deleteOneProduct,
   removeChosenType,
 };

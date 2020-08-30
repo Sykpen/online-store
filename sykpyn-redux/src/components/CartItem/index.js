@@ -5,7 +5,7 @@ import "./cartItem.css";
 class CartItem extends Component {
   render() {
     const {
-      addOneMore,
+      addOneProduct,
       id,
       deleteOneProduct,
       removeChosenType,
@@ -37,8 +37,8 @@ class CartItem extends Component {
           <div className="buttons">
             <Button
               variant="primary"
-              className="btn btn-success addOneMore"
-              onClick={() => addOneMore(id)}
+              className="btn btn-success addOneProduct"
+              onClick={() => addOneProduct(id)}
               disabled={isProductEnded()}
             >
               +
