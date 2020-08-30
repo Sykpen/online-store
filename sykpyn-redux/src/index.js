@@ -7,6 +7,9 @@ import { Provider } from "react-redux";
 import { createStore, compose } from "redux";
 import { rootReducer } from "./reducers/rootReducer";
 import "./i18n";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import MainSection from "./containers/MainPage";
+import Contacts from "./components/Contacts";
 
 const store = createStore(
   rootReducer,
@@ -16,12 +19,23 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Suspense fallback={<div>Loading...</div>}>
-    <Provider store={store}>
-      <React.StrictMode>
-        <Main />
-      </React.StrictMode>
-    </Provider>
-  </Suspense>,
+  <Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Provider store={store}>
+        <React.StrictMode>
+          <Main>
+            <Switch>
+              <Route exact path="/">
+                <MainSection />
+              </Route>
+              <Route path="/contacts">
+                <Contacts />
+              </Route>
+            </Switch>
+          </Main>
+        </React.StrictMode>
+      </Provider>
+    </Suspense>
+  </Router>,
   document.getElementById("root")
 );

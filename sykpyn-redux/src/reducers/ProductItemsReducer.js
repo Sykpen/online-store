@@ -2,20 +2,20 @@ import {
   ADD_TO_CART,
   CLEAN_CART,
   SHOW_PRODUCTS,
-  ADD_ONE_MORE,
+  ADD_ONE_PRODUCT,
   DELETE_ONE_PRODUCT,
   REMOVE_CHOSEN_TYPE,
   FILTER,
 } from "../constants";
 import { products } from "../api/products";
 import Immutable from "seamless-immutable";
+import { findProductById } from "../helpers";
 
 const initialState = {
   products: null,
   totalPrice: 0,
   productsAddedToCart: [],
   showCart: false,
-  chosenProduct: null,
 };
 
 // const filterTypes =[
@@ -34,9 +34,7 @@ const makeDefaultProductCopy = () => {
 export const ProductItemsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      let chosenProduct = state.products.filter(
-        (product) => product.id === action.productID
-      )[0];
+      let chosenProduct = findProductById(action.productID, state.products);
       if (
         state.productsAddedToCart.some(
           (product) => product.id === chosenProduct.id
@@ -55,36 +53,47 @@ export const ProductItemsReducer = (state = initialState, action) => {
         products: [...state.products],
         productsAddedToCart: [...state.productsAddedToCart],
         showCart: true,
-        chosenProduct: chosenProduct,
       };
-    case ADD_ONE_MORE:
-      state.chosenProduct.totalAmountToOrder++;
-      state.chosenProduct.totalPriceForOneProduct =
-        state.chosenProduct.price * state.chosenProduct.totalAmountToOrder;
-      state.chosenProduct.amount -= 1;
+    case ADD_ONE_PRODUCT:
+      let chosenProductInCart = findProductById(action.productID, state.productsAddedToCart);
+      chosenProductInCart.totalAmountToOrder++;
+      chosenProductInCart.totalPriceForOneProduct =
+        chosenProductInCart.price * chosenProductInCart.totalAmountToOrder;
+      chosenProductInCart.amount -= 1;
       return {
         ...state,
         products: [...state.products],
         productsAddedToCart: [...state.productsAddedToCart],
       };
     case DELETE_ONE_PRODUCT:
-      state.chosenProduct.totalAmountToOrder--;
-      state.chosenProduct.totalPriceForOneProduct =
-        state.chosenProduct.price * state.chosenProduct.totalAmountToOrder;
-      state.chosenProduct.amount += 1;
+      let chosenProductInCartForDeleting = findProductById(action.productID, state.productsAddedToCart);
+      chosenProductInCartForDeleting.totalAmountToOrder--;
+      chosenProductInCartForDeleting.totalPriceForOneProduct =
+        chosenProductInCartForDeleting.price * chosenProductInCartForDeleting.totalAmountToOrder;
+      chosenProductInCartForDeleting.amount += 1;
       return {
         ...state,
         products: [...state.products],
         productsAddedToCart: [...state.productsAddedToCart],
       };
     case REMOVE_CHOSEN_TYPE:
-      let filtered = state.productsAddedToCart.filter(
+      let productsInCart = state.productsAddedToCart.filter(
         (product) => product.id !== action.productID
       );
+      let chosenProductFromProductList = findProductById(
+        action.productID,
+        state.products
+      );
+      let chosenProductFromCart = findProductById(
+        action.productID,
+        state.productsAddedToCart
+      );
+      chosenProductFromProductList.amount +=
+      chosenProductFromCart.totalAmountToOrder;
       return {
         ...state,
         products: [...state.products],
-        productsAddedToCart: [...filtered],
+        productsAddedToCart: [...productsInCart],
       };
     case CLEAN_CART:
       return {

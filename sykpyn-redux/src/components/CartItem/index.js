@@ -5,7 +5,7 @@ import "./cartItem.css";
 class CartItem extends Component {
   render() {
     const {
-      addOneMore,
+      addOneProduct,
       id,
       deleteOneProduct,
       removeChosenType,
@@ -16,7 +16,7 @@ class CartItem extends Component {
       return product.amount === 0;
     };
 
-    const decreaseProductAmount = () => {
+    const canProductAmountDecrease = () => {
       return product.totalAmountToOrder <= 1;
     };
 
@@ -37,8 +37,8 @@ class CartItem extends Component {
           <div className="buttons">
             <Button
               variant="primary"
-              className="btn btn-success addOneMore"
-              onClick={() => addOneMore(id)}
+              className="btn btn-success addOneProduct"
+              onClick={() => addOneProduct(id)}
               disabled={isProductEnded()}
             >
               +
@@ -48,7 +48,7 @@ class CartItem extends Component {
               variant="primary"
               className="btn btn-warning deleteOne"
               onClick={() => deleteOneProduct(id)}
-              disabled={decreaseProductAmount()}
+              disabled={canProductAmountDecrease()}
             >
               -
             </Button>
