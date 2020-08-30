@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { createStore, compose } from "redux";
 import { rootReducer } from "./reducers/rootReducer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Def from "./containers/MainPage";
+import MainSection from "./containers/MainPage";
 import Contacts from "./components/Contacts";
 
 const store = createStore(
@@ -24,7 +24,7 @@ ReactDOM.render(
         <Main>
           <Switch>
             <Route exact path="/">
-              <Def />
+              <MainSection />
             </Route>
             <Route path="/contacts">
               <Contacts />

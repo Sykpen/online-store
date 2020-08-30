@@ -6,7 +6,7 @@ import Slider from "../../components/Slider";
 import { connect } from "react-redux";
 import { showProducts } from "../../actions";
 
-class Def extends Component {
+class MainSection extends Component {
   componentDidMount() {
     return this.props.showProducts();
   }
@@ -32,4 +32,4 @@ const mapDispatchToProps = {
   showProducts,
 };
 
-export default connect(null, mapDispatchToProps)(Def);
+export default connect(null, mapDispatchToProps)(MainSection);
