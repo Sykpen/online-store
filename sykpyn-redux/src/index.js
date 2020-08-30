@@ -6,6 +6,9 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
 import { createStore, compose } from "redux";
 import { rootReducer } from "./reducers/rootReducer";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import MainSection from "./containers/MainPage";
+import Contacts from "./components/Contacts";
 
 const store = createStore(
   rootReducer,
@@ -15,10 +18,21 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <Main />
-    </React.StrictMode>
-  </Provider>,
+  <Router>
+    <Provider store={store}>
+      <React.StrictMode>
+        <Main>
+          <Switch>
+            <Route exact path="/">
+              <MainSection />
+            </Route>
+            <Route path="/contacts">
+              <Contacts />
+            </Route>
+          </Switch>
+        </Main>
+      </React.StrictMode>
+    </Provider>
+  </Router>,
   document.getElementById("root")
 );
