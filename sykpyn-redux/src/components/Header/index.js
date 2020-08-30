@@ -6,6 +6,7 @@ function Header() {
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (language) => {
+    debugger
     i18n.changeLanguage(language);
   };
 

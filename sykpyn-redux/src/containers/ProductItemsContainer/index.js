@@ -15,6 +15,7 @@ const ProductItems = ({ products }) => {
       key={product.id}
       id={product.id}
       image={product.image}
+      titleEN={product.titleEN}
     />
   ));
 };
