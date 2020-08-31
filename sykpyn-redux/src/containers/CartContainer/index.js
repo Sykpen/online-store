@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import {
   cleanCart,
-  addOneMore,
+  addOneProduct,
   deleteOneProduct,
   removeChosenType,
 } from "../../actions/index";
@@ -14,11 +14,11 @@ const Cart = ({
   cleanCart,
   productsAddedToCart,
   showCart,
-  addOneMore,
+  addOneProduct,
   deleteOneProduct,
   removeChosenType,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <Fragment>
@@ -38,9 +38,10 @@ const Cart = ({
               <CartItem
                 id={product.id}
                 product={product}
-                addOneMore={addOneMore}
+                addOneProduct={addOneProduct}
                 deleteOneProduct={deleteOneProduct}
                 removeChosenType={removeChosenType}
+                i18n={i18n}
               />
             ))
           : t("noOrders")}

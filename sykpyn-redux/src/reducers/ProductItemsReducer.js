@@ -18,12 +18,19 @@ const initialState = {
   showCart: false,
 };
 
-// const filterTypes =[
-//   "withMeat", "vegetarian", "spacy", "sales", "hit", "withCheese",
-// ]
+const filterTypes = [
+  "withMeat",
+  "vegetarian",
+  "spacy",
+  "sales",
+  "hit",
+  "withCheese",
+];
 
 const defaultProducts = Immutable(products);
 let defaulProductsMutable;
+let arrayForFilters = [];
+let mySet = new Set();
 
 const makeDefaultProductCopy = () => {
   return (defaulProductsMutable = Immutable.asMutable(defaultProducts, {
@@ -55,7 +62,10 @@ export const ProductItemsReducer = (state = initialState, action) => {
         showCart: true,
       };
     case ADD_ONE_PRODUCT:
-      let chosenProductInCart = findProductById(action.productID, state.productsAddedToCart);
+      let chosenProductInCart = findProductById(
+        action.productID,
+        state.productsAddedToCart
+      );
       chosenProductInCart.totalAmountToOrder++;
       chosenProductInCart.totalPriceForOneProduct =
         chosenProductInCart.price * chosenProductInCart.totalAmountToOrder;
@@ -66,10 +76,14 @@ export const ProductItemsReducer = (state = initialState, action) => {
         productsAddedToCart: [...state.productsAddedToCart],
       };
     case DELETE_ONE_PRODUCT:
-      let chosenProductInCartForDeleting = findProductById(action.productID, state.productsAddedToCart);
+      let chosenProductInCartForDeleting = findProductById(
+        action.productID,
+        state.productsAddedToCart
+      );
       chosenProductInCartForDeleting.totalAmountToOrder--;
       chosenProductInCartForDeleting.totalPriceForOneProduct =
-        chosenProductInCartForDeleting.price * chosenProductInCartForDeleting.totalAmountToOrder;
+        chosenProductInCartForDeleting.price *
+        chosenProductInCartForDeleting.totalAmountToOrder;
       chosenProductInCartForDeleting.amount += 1;
       return {
         ...state,
@@ -89,7 +103,7 @@ export const ProductItemsReducer = (state = initialState, action) => {
         state.productsAddedToCart
       );
       chosenProductFromProductList.amount +=
-      chosenProductFromCart.totalAmountToOrder;
+        chosenProductFromCart.totalAmountToOrder;
       return {
         ...state,
         products: [...state.products],
@@ -103,14 +117,22 @@ export const ProductItemsReducer = (state = initialState, action) => {
         productsAddedToCart: [],
       };
     case FILTER:
-      console.log(products[0].type);
-      // let filterProducts = products.filter(
-      //   (product) => product.type === action.filterProductTypes
-      // );
+      if (arrayForFilters.includes(action.filterProductTypes)) {
+        let position = arrayForFilters.indexOf(action.filterProductTypes);
+        arrayForFilters.splice(position, 1);
+      } else {
+        arrayForFilters.push(action.filterProductTypes);
+      }
+      let uniqueFilters = new Set(arrayForFilters);
+      let uniqueFiltersArray = [...uniqueFilters];
       let filterProducts = products.filter((product) =>
-        product.type.includes(action.filterProductTypes)
+        arrayContainsArray(uniqueFiltersArray, product.type)
       );
-      console.log(filterProducts);
+      function arrayContainsArray(combineFilters, prouctTypes) {
+        return combineFilters.every(function (value) {
+          return prouctTypes.indexOf(value) >= 0;
+        });
+      }
       return {
         ...state,
         products: [...filterProducts],

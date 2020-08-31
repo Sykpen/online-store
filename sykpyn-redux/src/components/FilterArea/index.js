@@ -7,7 +7,7 @@ const FilterArea = ({ showProducts, filter }) => {
 
   return (
     <Fragment>
-      <div className="filter_area_main">
+      <div className="filter_area_main mt-3  d-flex justify-content-between align-items-center">
         <Button
           variant="primary"
           className="btn btn-success addOneMore"
@@ -18,7 +18,7 @@ const FilterArea = ({ showProducts, filter }) => {
         </Button>
         <Button
           variant="primary"
-          className="btn btn-success addOneMore"
+          className="btn btn-success addOneMore ml-1"
           data-type="withMeat"
           onClick={() => filter("withMeat")}
         >
@@ -26,7 +26,7 @@ const FilterArea = ({ showProducts, filter }) => {
         </Button>
         <Button
           variant="primary"
-          className="btn btn-success addOneMore"
+          className="btn btn-success addOneMore ml-1"
           data-type="vegetarian"
           onClick={() => filter("vegetarian")}
         >
@@ -34,7 +34,7 @@ const FilterArea = ({ showProducts, filter }) => {
         </Button>
         <Button
           variant="primary"
-          className="btn btn-success addOneMore"
+          className="btn btn-success addOneMore ml-1"
           data-type="spacy"
           onClick={() => filter("spacy")}
         >
@@ -42,7 +42,7 @@ const FilterArea = ({ showProducts, filter }) => {
         </Button>
         <Button
           variant="primary"
-          className="btn btn-success addOneMore"
+          className="btn btn-success addOneMore ml-1"
           data-type="sales"
           onClick={() => filter("sales")}
         >
@@ -50,7 +50,7 @@ const FilterArea = ({ showProducts, filter }) => {
         </Button>
         <Button
           variant="primary"
-          className="btn btn-success addOneMore"
+          className="btn btn-success addOneMore ml-1"
           data-type="hit"
           onClick={() => filter("hit")}
         >

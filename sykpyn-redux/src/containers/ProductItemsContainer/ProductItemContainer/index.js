@@ -4,7 +4,15 @@ import { addToCart } from "../../../actions";
 import { Card, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-const ProductItem = ({ title, titleEN, price, amount, id, addToCart, image }) => {
+const ProductItem = ({
+  title,
+  titleEN,
+  price,
+  amount,
+  id,
+  addToCart,
+  image,
+}) => {
   const { t, i18n } = useTranslation();
 
   const isProductEnded = () => {
@@ -15,7 +23,7 @@ const ProductItem = ({ title, titleEN, price, amount, id, addToCart, image }) =>
     <Card style={{ width: "18rem", marginTop: "10px" }}>
       <Card.Img variant="top" src={image} />
       <Card.Body>
-        <Card.Title>{i18n.language === 'ru' ? title : titleEN}</Card.Title>
+        <Card.Title>{i18n.language === "ru" ? title : titleEN}</Card.Title>
         <Card.Text>{t("cardText", { price: price, amount: amount })}</Card.Text>
         <Button
           variant="primary"

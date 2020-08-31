@@ -11,6 +11,7 @@ export const products = [
   {
     id: "a25fdb45-078c-4b1e-9cc7-a15f893f718f",
     title: "Паназия",
+    titleEN: "Panazia",
     price: 70,
     amount: 10,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
@@ -19,6 +20,7 @@ export const products = [
   {
     id: "93d7fb51-dc63-432e-ac02-55d55aa09b2e",
     title: "Супер Sykpyn",
+    titleEN: "Super Sykpyn",
     price: 80,
     amount: 15,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
@@ -27,6 +29,7 @@ export const products = [
   {
     id: "f98a7ca2-6265-48a3-945a-2a583cfd4aab",
     title: "Любимая пицца Димаса",
+    titleEN: "Dimas best",
     price: 90,
     amount: 20,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
@@ -35,6 +38,7 @@ export const products = [
   {
     id: "8eb5fc97-2c9a-4576-8779-68122b0aa1ee",
     title: "Мясное удовольствие",
+    titleEN: "Meat pleasure",
     price: 100,
     amount: 25,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
@@ -43,6 +47,7 @@ export const products = [
   {
     id: "3e305534-5b78-4042-be22-995dd593f06d",
     title: "Мандариновая",
+    titleEN: "Tangerine",
     price: 50,
     amount: 5,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
@@ -51,6 +56,7 @@ export const products = [
   {
     id: "aed1812c-6579-421d-bc87-9eba354b41b1",
     title: "Любимая Карбонара",
+    titleEN: "Favorite carbonara",
     price: 70,
     amount: 10,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
@@ -58,7 +64,8 @@ export const products = [
   },
   {
     id: "ee6e3d47-7061-46ca-9153-a26f9a8f9cfc",
-    title: "Восемб Сыров",
+    title: "Восемь Сыров",
+    titleEN: "8 cheeses",
     price: 80,
     amount: 15,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
@@ -67,6 +74,7 @@ export const products = [
   {
     id: "87dd63e9-8d9f-4a0e-8f82-778f9087ad9d",
     title: "Цыпленок Барбекю",
+    titleEN: "Chiken B-B-Q",
     price: 90,
     amount: 20,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
@@ -75,6 +83,7 @@ export const products = [
   {
     id: "e20c53cc-11bf-43e8-94af-33e4e017880b",
     title: "Цыпленок Рэнч",
+    titleEN: "Garlic chiken",
     price: 100,
     amount: 25,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
@@ -83,6 +92,7 @@ export const products = [
   {
     id: "3ebb6f04-0dc3-4786-bf5b-57b168cf753d",
     title: "Маргарита",
+    titleEN: "Margarita",
     price: 90,
     amount: 20,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
@@ -91,6 +101,7 @@ export const products = [
   {
     id: "649703c5-f8cd-4f7a-9d41-d0f69ebcab3f",
     title: "Горчичная",
+    titleEN: "Mustard",
     price: 100,
     amount: 25,
     image: "https://i.ibb.co/hs2SdxJ/4.jpg",
