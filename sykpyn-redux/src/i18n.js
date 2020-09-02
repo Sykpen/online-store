@@ -1,7 +1,5 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-// import common_en from './locales/en/translation.json'
-// import common_ru from './locales/ru/translation.json'
 
 const resources = {
   en: {
@@ -13,13 +11,14 @@ const resources = {
       vegetarian: "Vegetarian",
       hot: "Hot",
       hit: "Hit",
+      spacy: "Spacy",
       cart: "Cart",
       noOrders: "No Orders!",
       cleanAll: "Clean All",
       addToCart: "Add to cart",
       search: "Search",
       cardText:
-        "So hard to make this fucking english text. {{price}} only. Harry up. The offer is limited ({{amount}} left).",
+        "Best pizzas in town. {{price}} only. Harry up. The offer is limited ({{amount}} left).",
     },
   },
   ru: {
@@ -31,6 +30,7 @@ const resources = {
       vegetarian: "Вегетерианские",
       hot: "Острые",
       hit: "Лидеры продаж",
+      spacy: "Космические",
       cart: "Корзина",
       noOrders: "Заказов пока нет!",
       cleanAll: "Очистить корзину!",
@@ -41,19 +41,6 @@ const resources = {
     },
   },
 };
-
-// const resources = {
-//   en: {
-//     translation: {
-//       common_en
-//     },
-//   },
-//   ru: {
-//     translation: {
-//       common_ru
-//     },
-//   },
-// };
 
 i18n.use(initReactI18next).init({
   resources,

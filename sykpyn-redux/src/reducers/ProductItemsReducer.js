@@ -5,37 +5,28 @@ import {
   ADD_ONE_PRODUCT,
   DELETE_ONE_PRODUCT,
   REMOVE_CHOSEN_TYPE,
-  FILTER,
+  FILTER_PRODUCTS,
 } from "../constants";
 import { products } from "../api/products";
 import Immutable from "seamless-immutable";
-import { findProductById } from "../helpers";
+import { findProductById, collectionContains } from "../helpers";
+
+const defaultProducts = Immutable(products);
+let defaulProductsMutable;
+let arrayForFilters = [];
+
+const makeDefaultProductCopy = () => {
+  return (defaulProductsMutable = Immutable.asMutable(defaultProducts, {
+    deep: true,
+  }));
+};
 
 const initialState = {
   products: null,
   totalPrice: 0,
   productsAddedToCart: [],
   showCart: false,
-};
-
-const filterTypes = [
-  "withMeat",
-  "vegetarian",
-  "spacy",
-  "sales",
-  "hit",
-  "withCheese",
-];
-
-const defaultProducts = Immutable(products);
-let defaulProductsMutable;
-let arrayForFilters = [];
-let mySet = new Set();
-
-const makeDefaultProductCopy = () => {
-  return (defaulProductsMutable = Immutable.asMutable(defaultProducts, {
-    deep: true,
-  }));
+  stableProductCopy: makeDefaultProductCopy(),
 };
 
 export const ProductItemsReducer = (state = initialState, action) => {
@@ -116,23 +107,17 @@ export const ProductItemsReducer = (state = initialState, action) => {
         products: state.products ? makeDefaultProductCopy() : null,
         productsAddedToCart: [],
       };
-    case FILTER:
+    case FILTER_PRODUCTS:
       if (arrayForFilters.includes(action.filterProductTypes)) {
         let position = arrayForFilters.indexOf(action.filterProductTypes);
         arrayForFilters.splice(position, 1);
       } else {
         arrayForFilters.push(action.filterProductTypes);
       }
-      let uniqueFilters = new Set(arrayForFilters);
-      let uniqueFiltersArray = [...uniqueFilters];
+      let uniqueFiltersArray = [...new Set(arrayForFilters)];
       let filterProducts = products.filter((product) =>
-        arrayContainsArray(uniqueFiltersArray, product.type)
+        collectionContains(uniqueFiltersArray, product.type)
       );
-      function arrayContainsArray(combineFilters, prouctTypes) {
-        return combineFilters.every(function (value) {
-          return prouctTypes.indexOf(value) >= 0;
-        });
-      }
       return {
         ...state,
         products: [...filterProducts],

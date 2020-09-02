@@ -3,8 +3,8 @@ import ProductItems from "../ProductItemsContainer";
 import Cart from "../CartContainer";
 import Slider from "../../components/Slider";
 import { connect } from "react-redux";
-import { showProducts, filter } from "../../actions";
-import Filter from "../../components/FilterArea";
+import { showProducts, filterProducts } from "../../actions";
+import FilterArea from "../../components/FilterArea";
 
 class MainSection extends Component {
   componentDidMount() {
@@ -12,13 +12,18 @@ class MainSection extends Component {
   }
 
   render() {
+    const { stableProductCopy } = this.props;
     return (
       <Fragment>
         <Slider />
         <div className="container">
           <div className="pt-3 d-flex">
             <div className="d-flex justify-content-around align-items-center flex-grow-1 flex-wrap">
-              <Filter filter={this.props.filter} showProducts={this.props.showProducts}/>
+              <FilterArea
+                filterProducts={this.props.filterProducts}
+                showProducts={this.props.showProducts}
+                stableProductCopy={stableProductCopy}
+              />
               <ProductItems />
             </div>
             <div className="flex-shrink-0">
@@ -31,9 +36,15 @@ class MainSection extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  showProducts,
-  filter,
+const mapStateToProps = (state) => {
+  return {
+    stableProductCopy: state.productItems.stableProductCopy,
+  };
 };
 
-export default connect(null, mapDispatchToProps)(MainSection);
+const mapDispatchToProps = {
+  showProducts,
+  filterProducts,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainSection);
