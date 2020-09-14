@@ -5,6 +5,7 @@ import {
   ADD_ONE_PRODUCT,
   DELETE_ONE_PRODUCT,
   REMOVE_CHOSEN_TYPE,
+  FILTER_PRODUCTS,
 } from "../constants";
 
 export const addToCart = (id) => ({ type: ADD_TO_CART, productID: id });
@@ -19,3 +20,4 @@ export const removeChosenType = (id) => ({
   type: REMOVE_CHOSEN_TYPE,
   productID: id,
 });
+export const filterProducts = (filterProductTypes) => ({ type: FILTER_PRODUCTS, filterProductTypes });
