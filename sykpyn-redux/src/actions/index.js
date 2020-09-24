@@ -5,6 +5,7 @@ import {
   DELETE_ONE_PRODUCT,
   REMOVE_CHOSEN_TYPE,
   RECEIVE_PPODUCTS,
+  FILTER_PRODUCTS,
 } from "../constants";
 import fetch from "cross-fetch";
 
@@ -89,3 +90,4 @@ export const removeChosenType = (id) => ({
   type: REMOVE_CHOSEN_TYPE,
   productID: id,
 });
+export const filterProducts = (filterProductTypes) => ({ type: FILTER_PRODUCTS, filterProductTypes });

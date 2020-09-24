@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Main from "./containers/MainContainer/Main";
@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
 import { createStore, compose, applyMiddleware  } from "redux";
 import { rootReducer } from "./reducers/rootReducer";
+import "./i18n";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainSection from "./containers/MainPage";
 import Contacts from "./components/Contacts";

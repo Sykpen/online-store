@@ -5,24 +5,27 @@ import {
   DELETE_ONE_PRODUCT,
   REMOVE_CHOSEN_TYPE,
   RECEIVE_PPODUCTS,
+  FILTER_PRODUCTS,
 } from "../constants";
 import Immutable from "seamless-immutable";
-import { findProductById } from "../helpers";
+import { findProductById, collectionContains } from "../helpers";
+
+const defaultProducts = Immutable(initialState.products);
+let defaulProductsMutable;
+let arrayForFilters = [];
+
+const makeDefaultProductCopy = () => {
+  return (defaulProductsMutable = Immutable.asMutable(defaultProducts, {
+    deep: true,
+  }));
+};
 
 const initialState = {
   products: null,
   totalPrice: 0,
   productsAddedToCart: [],
   showCart: false,
-};
-
-const defaultProducts = Immutable(initialState.products);
-let defaulProductsMutable;
-
-const makeDefaultProductCopy = () => {
-  return (defaulProductsMutable = Immutable.asMutable(defaultProducts, {
-    deep: true,
-  }));
+  stableProductCopy: makeDefaultProductCopy(),
 };
 
 export const ProductItemsReducer = (state = initialState, action) => {
@@ -107,6 +110,26 @@ export const ProductItemsReducer = (state = initialState, action) => {
         totalPrice: 0,
         products: state.products ? makeDefaultProductCopy() : null,
         productsAddedToCart: [],
+      };
+    case FILTER_PRODUCTS:
+      if (arrayForFilters.includes(action.filterProductTypes)) {
+        let position = arrayForFilters.indexOf(action.filterProductTypes);
+        arrayForFilters.splice(position, 1);
+      } else {
+        arrayForFilters.push(action.filterProductTypes);
+      }
+      let uniqueFiltersArray = [...new Set(arrayForFilters)];
+      let filterProducts = products.filter((product) =>
+        collectionContains(uniqueFiltersArray, product.type)
+      );
+      return {
+        ...state,
+        products: [...filterProducts],
+      };
+    case SHOW_PRODUCTS:
+      return {
+        ...state,
+        products: products,
       };
     default:
       return state;

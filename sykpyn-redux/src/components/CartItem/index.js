@@ -10,6 +10,7 @@ class CartItem extends Component {
       deleteOneProduct,
       removeChosenType,
       product,
+      i18n,
     } = this.props;
 
     const isProductEnded = () => {
@@ -24,7 +25,8 @@ class CartItem extends Component {
       <Fragment>
         <div>
           <div className="catItem_text">
-            {product.title}: {product.price} x {product.totalAmountToOrder} ={" "}
+            {i18n.language === "ru" ? product.title : product.titleEN}:{" "}
+            {product.price} x {product.totalAmountToOrder} ={" "}
             {product.totalPriceForOneProduct}{" "}
             <Button
               variant="primary"
