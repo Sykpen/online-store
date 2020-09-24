@@ -1,14 +1,13 @@
 import React, { Component, Fragment } from "react";
 import ProductItems from "../ProductItemsContainer";
 import Cart from "../CartContainer";
-import Header from "../../components/Header";
 import Slider from "../../components/Slider";
 import { connect } from "react-redux";
-import { showProducts } from "../../actions";
+import { fetchProducts } from "../../actions";
 
 class MainSection extends Component {
   componentDidMount() {
-    return this.props.showProducts();
+    return this.props.fetchProducts();
   }
 
   render() {
@@ -29,7 +28,7 @@ class MainSection extends Component {
 }
 
 const mapDispatchToProps = {
-  showProducts,
+  fetchProducts,
 };
 
 export default connect(null, mapDispatchToProps)(MainSection);

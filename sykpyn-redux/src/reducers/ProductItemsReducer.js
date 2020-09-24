@@ -1,12 +1,11 @@
 import {
   ADD_TO_CART,
   CLEAN_CART,
-  SHOW_PRODUCTS,
   ADD_ONE_PRODUCT,
   DELETE_ONE_PRODUCT,
   REMOVE_CHOSEN_TYPE,
+  RECEIVE_PPODUCTS,
 } from "../constants";
-import { products } from "../api/products";
 import Immutable from "seamless-immutable";
 import { findProductById } from "../helpers";
 
@@ -17,7 +16,7 @@ const initialState = {
   showCart: false,
 };
 
-const defaultProducts = Immutable(products);
+const defaultProducts = Immutable(initialState.products);
 let defaulProductsMutable;
 
 const makeDefaultProductCopy = () => {
@@ -28,6 +27,11 @@ const makeDefaultProductCopy = () => {
 
 export const ProductItemsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case RECEIVE_PPODUCTS:
+      return {
+        ...state,
+        products: action.products,
+      };
     case ADD_TO_CART:
       let chosenProduct = findProductById(action.productID, state.products);
       if (
@@ -50,7 +54,10 @@ export const ProductItemsReducer = (state = initialState, action) => {
         showCart: true,
       };
     case ADD_ONE_PRODUCT:
-      let chosenProductInCart = findProductById(action.productID, state.productsAddedToCart);
+      let chosenProductInCart = findProductById(
+        action.productID,
+        state.productsAddedToCart
+      );
       chosenProductInCart.totalAmountToOrder++;
       chosenProductInCart.totalPriceForOneProduct =
         chosenProductInCart.price * chosenProductInCart.totalAmountToOrder;
@@ -61,10 +68,14 @@ export const ProductItemsReducer = (state = initialState, action) => {
         productsAddedToCart: [...state.productsAddedToCart],
       };
     case DELETE_ONE_PRODUCT:
-      let chosenProductInCartForDeleting = findProductById(action.productID, state.productsAddedToCart);
+      let chosenProductInCartForDeleting = findProductById(
+        action.productID,
+        state.productsAddedToCart
+      );
       chosenProductInCartForDeleting.totalAmountToOrder--;
       chosenProductInCartForDeleting.totalPriceForOneProduct =
-        chosenProductInCartForDeleting.price * chosenProductInCartForDeleting.totalAmountToOrder;
+        chosenProductInCartForDeleting.price *
+        chosenProductInCartForDeleting.totalAmountToOrder;
       chosenProductInCartForDeleting.amount += 1;
       return {
         ...state,
@@ -84,7 +95,7 @@ export const ProductItemsReducer = (state = initialState, action) => {
         state.productsAddedToCart
       );
       chosenProductFromProductList.amount +=
-      chosenProductFromCart.totalAmountToOrder;
+        chosenProductFromCart.totalAmountToOrder;
       return {
         ...state,
         products: [...state.products],
@@ -96,11 +107,6 @@ export const ProductItemsReducer = (state = initialState, action) => {
         totalPrice: 0,
         products: state.products ? makeDefaultProductCopy() : null,
         productsAddedToCart: [],
-      };
-    case SHOW_PRODUCTS:
-      return {
-        ...state,
-        products: products,
       };
     default:
       return state;
