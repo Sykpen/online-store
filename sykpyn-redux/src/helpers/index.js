@@ -7,3 +7,7 @@ export const collectionContains = (combineFilters, prouctTypes) => {
     return prouctTypes.indexOf(value) >= 0;
   });
 };
+
+export const buildRequestOptions = (method, headers, body) => {
+  return { method: method, headers: headers, body: JSON.stringify(body) };
+};

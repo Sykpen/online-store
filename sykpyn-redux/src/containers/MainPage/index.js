@@ -4,7 +4,7 @@ import Cart from "../CartContainer";
 import Slider from "../../components/Slider";
 import { connect } from "react-redux";
 import { fetchProducts } from "../../actions";
-import { showProducts, filterProducts } from "../../actions";
+import { filterProducts } from "../../actions";
 import FilterArea from "../../components/FilterArea";
 
 class MainSection extends Component {
@@ -22,7 +22,6 @@ class MainSection extends Component {
             <div className="d-flex justify-content-around align-items-center flex-grow-1 flex-wrap">
               <FilterArea
                 filterProducts={this.props.filterProducts}
-                showProducts={this.props.showProducts}
                 stableProductCopy={stableProductCopy}
               />
               <ProductItems />
@@ -45,7 +44,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   fetchProducts,
-  showProducts,
   filterProducts,
 };
 

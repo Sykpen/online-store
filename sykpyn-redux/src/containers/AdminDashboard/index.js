@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
-import { addNewProduct, fetchProducts } from "../../actions";
+import { addNewProduct, fetchProducts, closeModal } from "../../actions";
 import { connect } from "react-redux";
 import ProductsForAdminPage from "../ProductsForAdminPage";
 import "./style.css";
+import { Modal, Button } from "react-bootstrap";
 
 class AdminDashboard extends React.Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class AdminDashboard extends React.Component {
       titleEN: "",
       price: "",
       amount: "",
-      img_url: "",
+      imgUrl: "",
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,7 +31,7 @@ class AdminDashboard extends React.Component {
       titleEN: this.state.titleEN,
       price: this.state.price,
       amount: this.state.amount,
-      img_url: this.state.img_url,
+      img_url: this.state.imgUrl,
     };
 
     this.props.addNewProduct(new_product);
@@ -88,11 +89,11 @@ class AdminDashboard extends React.Component {
               />
             </p>
             <p>
-              <label for="img_url">Img Url</label>
+              <label for="imgUrl">Img Url</label>
               <input
-                id="img_url"
+                id="imgUrl"
                 type="text"
-                name="img_url"
+                name="imgUrl"
                 onChange={this.handleInputChange}
               />
             </p>
@@ -101,14 +102,33 @@ class AdminDashboard extends React.Component {
             </p>
           </form>
         </div>
+        <Modal
+          show={this.props.showModal}
+          onHide={() => this.props.closeModal()}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Report</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Well done, you made it!!!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => this.props.closeModal()}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Fragment>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  showModal: state.productItems.showModal,
+});
+
 const mapDispatchToProps = {
   addNewProduct,
   fetchProducts,
+  closeModal,
 };
 
-export default connect(null, mapDispatchToProps)(AdminDashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminDashboard);

@@ -6,41 +6,49 @@ import {
   REMOVE_CHOSEN_TYPE,
   RECEIVE_PPODUCTS,
   FILTER_PRODUCTS,
+  SHOW_MODAL,
+  CLOSE_MODAL,
 } from "../constants";
 import fetch from "cross-fetch";
+import { buildRequestOptions } from "../helpers";
+
+const HOST = `http://localhost:3000/products`;
+
+export const showModal = () => ({ type: SHOW_MODAL });
+export const closeModal = () => ({ type: CLOSE_MODAL });
 
 export const fetchProducts = () => {
   return (dispatch) => {
-    return fetch(`http://localhost:3000/products`)
+    return fetch(HOST)
       .then((response) => response.json())
       .then((json) => dispatch(receiveProducts(json)));
   };
 };
 
 export const addNewProduct = (newProduct) => {
-  const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(newProduct),
-  };
+  let requestOptions = buildRequestOptions(
+    "POST",
+    { "Content-Type": "application/json" },
+    newProduct
+  );
   return (dispatch) => {
-    return fetch("http://localhost:3000/products", requestOptions)
+    return fetch(HOST, requestOptions)
       .then((response) => response.json())
-      .then((json) => alert(`Title: ${json.new_product.title}`));
+      .then((json) => dispatch(showModal()));
   };
 };
 
 export const deleteChosenProduct = (id) => {
   let arrayWithId = { id: id };
-  const url = `http://localhost:3000/products/${id}`;
-  const requestOptions = {
-    method: "DELETE",
-    headers: {
+  const url = `${HOST}/${id}`;
+  let requestOptions = buildRequestOptions(
+    "DELETE",
+    {
       "Content-Type": "application/json",
       "X-Requested-With": "XMLHttpRequest",
     },
-    body: JSON.stringify(arrayWithId),
-  };
+    arrayWithId
+  );
   return (dispatch) => {
     return fetch(url, requestOptions)
       .then((response) => response.json())
@@ -53,15 +61,15 @@ export const deleteChosenProduct = (id) => {
 
 export const updateChosenProduct = (id) => {
   let updateTitleArray = { id: id, title: "New title after Update" };
-  const url = `http://localhost:3000/products/${id}`;
-  const requestOptions = {
-    method: "PUT",
-    headers: {
+  let requestOptions = buildRequestOptions(
+    "PUT",
+    {
       "Content-Type": "application/json",
       "X-Requested-With": "XMLHttpRequest",
     },
-    body: JSON.stringify(updateTitleArray),
-  };
+    updateTitleArray
+  );
+  const url = `${HOST}/${id}`;
   return (dispatch) => {
     return fetch(url, requestOptions)
       .then((response) => response.json())
@@ -90,4 +98,7 @@ export const removeChosenType = (id) => ({
   type: REMOVE_CHOSEN_TYPE,
   productID: id,
 });
-export const filterProducts = (filterProductTypes) => ({ type: FILTER_PRODUCTS, filterProductTypes });
+export const filterProducts = (filterProductTypes) => ({
+  type: FILTER_PRODUCTS,
+  filterProductTypes,
+});

@@ -6,26 +6,20 @@ import {
   REMOVE_CHOSEN_TYPE,
   RECEIVE_PPODUCTS,
   FILTER_PRODUCTS,
+  SHOW_MODAL,
+  CLOSE_MODAL,
 } from "../constants";
 import Immutable from "seamless-immutable";
 import { findProductById, collectionContains } from "../helpers";
 
-const defaultProducts = Immutable(initialState.products);
-let defaulProductsMutable;
 let arrayForFilters = [];
-
-const makeDefaultProductCopy = () => {
-  return (defaulProductsMutable = Immutable.asMutable(defaultProducts, {
-    deep: true,
-  }));
-};
 
 const initialState = {
   products: null,
   totalPrice: 0,
   productsAddedToCart: [],
   showCart: false,
-  stableProductCopy: makeDefaultProductCopy(),
+  showModal: false,
 };
 
 export const ProductItemsReducer = (state = initialState, action) => {
@@ -34,6 +28,16 @@ export const ProductItemsReducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.products,
+      };
+    case SHOW_MODAL:
+      return {
+        ...state,
+        showModal: true,
+      };
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        showModal: false,
       };
     case ADD_TO_CART:
       let chosenProduct = findProductById(action.productID, state.products);
@@ -108,7 +112,6 @@ export const ProductItemsReducer = (state = initialState, action) => {
       return {
         ...state,
         totalPrice: 0,
-        products: state.products ? makeDefaultProductCopy() : null,
         productsAddedToCart: [],
       };
     case FILTER_PRODUCTS:
@@ -119,17 +122,12 @@ export const ProductItemsReducer = (state = initialState, action) => {
         arrayForFilters.push(action.filterProductTypes);
       }
       let uniqueFiltersArray = [...new Set(arrayForFilters)];
-      let filterProducts = products.filter((product) =>
+      let filterProducts = state.products.filter((product) =>
         collectionContains(uniqueFiltersArray, product.type)
       );
       return {
         ...state,
         products: [...filterProducts],
-      };
-    case SHOW_PRODUCTS:
-      return {
-        ...state,
-        products: products,
       };
     default:
       return state;

@@ -17,14 +17,14 @@ class ProductItemForAdminPage extends Component {
             className="btn btn-danger"
             onClick={() => deleteChosenProduct(id)}
           >
-            Удалить
+            Delete
           </Button>
           <Button
             variant="primary"
             className="btn btn-warning"
             onClick={() => updateChosenProduct(id)}
           >
-            Изменить
+            Change
           </Button>
         </Card.Body>
       </Card>
