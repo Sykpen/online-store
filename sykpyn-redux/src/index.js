@@ -13,6 +13,9 @@ import Contacts from "./components/Contacts";
 import AdminDashboard from "./containers/AdminDashboard";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+import SignInForm from "./containers/Authorization/SignInForm";
+import ClientCabinet from "./containers/ClientCabinet";
+import LoginForm from './containers/Authorization/LoginForm'
 
 const store = createStore(
   rootReducer,
@@ -33,6 +36,15 @@ ReactDOM.render(
             </Route>
             <Route path="/admin_dashboard">
               <AdminDashboard />
+            </Route>
+            <Route path="/sign_in">
+              <SignInForm />
+            </Route>
+            <Route path="/client_cabinet">
+              <ClientCabinet />
+            </Route>
+            <Route path="/login">
+              <LoginForm />
             </Route>
           </Switch>
         </Main>

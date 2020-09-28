@@ -27,6 +27,7 @@ export class ApiHelper {
   }
 
   static post(product, path) {
+    console.log(product, path)
     let requestOptions = buildRequestOptions("POST", product);
     return fetch(`${BASE_HOST}/${path}`, requestOptions);
   }

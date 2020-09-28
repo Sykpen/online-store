@@ -9,7 +9,6 @@ import {
   SHOW_MODAL,
   CLOSE_MODAL,
 } from "../constants";
-import fetch from "cross-fetch";
 import { ApiHelper } from "../helpers";
 
 export const showModal = () => ({ type: SHOW_MODAL });
@@ -23,9 +22,17 @@ export const fetchProducts = () => {
   };
 };
 
+export const addNewClient = (newClient) => {
+  return (dispatch) => {
+    ApiHelper.post(newClient, "clients")
+      .then((response) => response.json())
+      .then((json) => dispatch(showModal()));
+  };
+};
+
 export const addNewProduct = (newProduct) => {
   return (dispatch) => {
-    ApiHelper.post(newProduct, "products")
+    ApiHelper.post(newProduct, "admins/products")
       .then((response) => response.json())
       .then((json) => dispatch(showModal()));
   };
@@ -33,7 +40,7 @@ export const addNewProduct = (newProduct) => {
 
 export const deleteChosenProduct = (id) => {
   return (dispatch) => {
-    ApiHelper.delete(id, "products")
+    ApiHelper.delete(id, "admins/products")
       .then((response) => response.json())
       .then(
         (json) => alert(`Deleted product: ${json.deleted_product.title}`),
@@ -44,12 +51,20 @@ export const deleteChosenProduct = (id) => {
 
 export const updateChosenProduct = (id) => {
   return (dispatch) => {
-    ApiHelper.update(id, "products")
+    ApiHelper.update(id, "admins/products")
       .then((response) => response.json())
       .then(
         (json) => alert(`Updated product id: ${json.update.id}`),
         window.location.reload(false)
       );
+  };
+};
+
+export const checkIfClientExist = (clientParams) => {
+  return (dispatch) => {
+    ApiHelper.post(clientParams, "clients/login")
+      .then((response) => response.json())
+      .then((json) => alert(json.response));
   };
 };
 
