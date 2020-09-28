@@ -1,4 +1,4 @@
-import { HOST } from "../constants";
+import { BASE_HOST } from "../constants";
 
 export const findProductById = (productId, products) => {
   return products.filter((product) => product.id === productId)[0];
@@ -22,26 +22,25 @@ export const buildRequestOptions = (method, body) => {
 };
 
 export class ApiHelper {
-  constructor(product, id) {
-    this.product = product;
-    this.id = id;
+  static get(path) {
+    return fetch(`${BASE_HOST}/${path}`);
   }
 
-  static post(product) {
+  static post(product, path) {
     let requestOptions = buildRequestOptions("POST", product);
-    return fetch(HOST, requestOptions);
+    return fetch(`${BASE_HOST}/${path}`, requestOptions);
   }
 
-  static delete(id) {
+  static delete(id, path) {
     let arrayWithId = { id: id };
-    const url = `${HOST}/${id}`;
+    const url = `${BASE_HOST}/${path}/${id}`;
     let requestOptions = buildRequestOptions("DELETE", arrayWithId);
     return fetch(url, requestOptions);
   }
 
-  static update(id) {
+  static update(id, path) {
     let updateTitleArray = { id: id, title: "New title after Update" };
-    const url = `${HOST}/${id}`;
+    const url = `${BASE_HOST}/${path}/${id}`;
     let requestOptions = buildRequestOptions("PUT", updateTitleArray);
     return fetch(url, requestOptions);
   }

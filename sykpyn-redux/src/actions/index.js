@@ -8,7 +8,6 @@ import {
   FILTER_PRODUCTS,
   SHOW_MODAL,
   CLOSE_MODAL,
-  HOST,
 } from "../constants";
 import fetch from "cross-fetch";
 import { ApiHelper } from "../helpers";
@@ -18,7 +17,7 @@ export const closeModal = () => ({ type: CLOSE_MODAL });
 
 export const fetchProducts = () => {
   return (dispatch) => {
-    return fetch(HOST)
+    ApiHelper.get("products")
       .then((response) => response.json())
       .then((json) => dispatch(receiveProducts(json)));
   };
@@ -26,7 +25,7 @@ export const fetchProducts = () => {
 
 export const addNewProduct = (newProduct) => {
   return (dispatch) => {
-    ApiHelper.post(newProduct)
+    ApiHelper.post(newProduct, "products")
       .then((response) => response.json())
       .then((json) => dispatch(showModal()));
   };
@@ -34,7 +33,7 @@ export const addNewProduct = (newProduct) => {
 
 export const deleteChosenProduct = (id) => {
   return (dispatch) => {
-    ApiHelper.delete(id)
+    ApiHelper.delete(id, "products")
       .then((response) => response.json())
       .then(
         (json) => alert(`Deleted product: ${json.deleted_product.title}`),
@@ -45,7 +44,7 @@ export const deleteChosenProduct = (id) => {
 
 export const updateChosenProduct = (id) => {
   return (dispatch) => {
-    ApiHelper.update(id)
+    ApiHelper.update(id, "products")
       .then((response) => response.json())
       .then(
         (json) => alert(`Updated product id: ${json.update.id}`),
