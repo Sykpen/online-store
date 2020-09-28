@@ -7,3 +7,4 @@ export const RECEIVE_PPODUCTS = "RECEIVE_PPODUCTS";
 export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
+export const HOST = `http://localhost:3000/products`;

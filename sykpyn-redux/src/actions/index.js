@@ -8,11 +8,10 @@ import {
   FILTER_PRODUCTS,
   SHOW_MODAL,
   CLOSE_MODAL,
+  HOST,
 } from "../constants";
 import fetch from "cross-fetch";
-import { buildRequestOptions } from "../helpers";
-
-const HOST = `http://localhost:3000/products`;
+import { ApiHelper } from "../helpers";
 
 export const showModal = () => ({ type: SHOW_MODAL });
 export const closeModal = () => ({ type: CLOSE_MODAL });
@@ -26,31 +25,16 @@ export const fetchProducts = () => {
 };
 
 export const addNewProduct = (newProduct) => {
-  let requestOptions = buildRequestOptions(
-    "POST",
-    { "Content-Type": "application/json" },
-    newProduct
-  );
   return (dispatch) => {
-    return fetch(HOST, requestOptions)
+    ApiHelper.post(newProduct)
       .then((response) => response.json())
       .then((json) => dispatch(showModal()));
   };
 };
 
 export const deleteChosenProduct = (id) => {
-  let arrayWithId = { id: id };
-  const url = `${HOST}/${id}`;
-  let requestOptions = buildRequestOptions(
-    "DELETE",
-    {
-      "Content-Type": "application/json",
-      "X-Requested-With": "XMLHttpRequest",
-    },
-    arrayWithId
-  );
   return (dispatch) => {
-    return fetch(url, requestOptions)
+    ApiHelper.delete(id)
       .then((response) => response.json())
       .then(
         (json) => alert(`Deleted product: ${json.deleted_product.title}`),
@@ -60,18 +44,8 @@ export const deleteChosenProduct = (id) => {
 };
 
 export const updateChosenProduct = (id) => {
-  let updateTitleArray = { id: id, title: "New title after Update" };
-  let requestOptions = buildRequestOptions(
-    "PUT",
-    {
-      "Content-Type": "application/json",
-      "X-Requested-With": "XMLHttpRequest",
-    },
-    updateTitleArray
-  );
-  const url = `${HOST}/${id}`;
   return (dispatch) => {
-    return fetch(url, requestOptions)
+    ApiHelper.update(id)
       .then((response) => response.json())
       .then(
         (json) => alert(`Updated product id: ${json.update.id}`),
