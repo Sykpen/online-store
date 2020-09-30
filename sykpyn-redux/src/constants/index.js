@@ -8,3 +8,5 @@ export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
 export const BASE_HOST=`http://localhost:3000`;
+export const LOGIN_CLIENT = "LOGIN_CLIENT";
+export const LOGIN_ADMIN = "LOGIN_ADMIN";

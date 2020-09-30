@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-const FilterArea = ({ showProducts, filterProducts, stableProductCopy }) => {
+const FilterArea = ({ filterProducts, stableProductCopy }) => {
   const { t } = useTranslation();
   let arrayForTypes = [];
 

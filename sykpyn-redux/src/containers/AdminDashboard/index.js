@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
-import { addNewProduct, fetchProducts, closeModal } from "../../actions";
+import { closeModal } from "../../actions/authorization";
+import { addNewProduct, fetchProducts } from "../../actions";
 import { connect } from "react-redux";
 import ProductsForAdminPage from "../ProductsForAdminPage";
 import "./style.css";

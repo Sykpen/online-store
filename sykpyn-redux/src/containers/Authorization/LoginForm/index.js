@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { connect } from "react-redux";
-import { checkIfClientExist } from "../../../actions";
+import { checkIfClientExist } from "../../../actions/authorization";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -22,8 +22,8 @@ class LoginForm extends React.Component {
       email: this.state.email,
       password: this.state.password,
     };
-
-    this.props.checkIfClientExist(new_client);
+    console.log(this.props.history)
+    this.props.checkIfClientExist(new_client, this.props.history);
   };
 
   handleInputChange = (e) => {

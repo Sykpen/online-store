@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { addToCart } from "../../../actions";
 import { Card, Button } from "react-bootstrap";

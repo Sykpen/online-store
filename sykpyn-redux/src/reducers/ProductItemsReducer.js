@@ -6,10 +6,7 @@ import {
   REMOVE_CHOSEN_TYPE,
   RECEIVE_PPODUCTS,
   FILTER_PRODUCTS,
-  SHOW_MODAL,
-  CLOSE_MODAL,
 } from "../constants";
-import Immutable from "seamless-immutable";
 import { findProductById, collectionContains } from "../helpers";
 
 let arrayForFilters = [];
@@ -19,7 +16,6 @@ const initialState = {
   totalPrice: 0,
   productsAddedToCart: [],
   showCart: false,
-  showModal: false,
 };
 
 export const ProductItemsReducer = (state = initialState, action) => {
@@ -28,16 +24,6 @@ export const ProductItemsReducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.products,
-      };
-    case SHOW_MODAL:
-      return {
-        ...state,
-        showModal: true,
-      };
-    case CLOSE_MODAL:
-      return {
-        ...state,
-        showModal: false,
       };
     case ADD_TO_CART:
       let chosenProduct = findProductById(action.productID, state.products);

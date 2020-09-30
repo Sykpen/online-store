@@ -1,15 +1,15 @@
 import React, { Component, Fragment } from "react";
-import Header from "../../components/Header";
+import { connect } from "react-redux";
+import { setStoreFromLocal } from "../../actions/authorization";
 
 class Main extends Component {
   render() {
+    this.props.setStoreFromLocal();
     const { children } = this.props;
-    return (
-      <Fragment>
-        <Header />
-        {children}
-      </Fragment>
-    );
+    return <Fragment>{children}</Fragment>;
   }
 }
-export default Main;
+
+const mapDispatchToProps = { setStoreFromLocal };
+
+export default connect(null, mapDispatchToProps)(Main);

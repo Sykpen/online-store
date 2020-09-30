@@ -6,13 +6,9 @@ import {
   REMOVE_CHOSEN_TYPE,
   RECEIVE_PPODUCTS,
   FILTER_PRODUCTS,
-  SHOW_MODAL,
-  CLOSE_MODAL,
 } from "../constants";
 import { ApiHelper } from "../helpers";
-
-export const showModal = () => ({ type: SHOW_MODAL });
-export const closeModal = () => ({ type: CLOSE_MODAL });
+import { showModal } from "./authorization";
 
 export const fetchProducts = () => {
   return (dispatch) => {
@@ -34,7 +30,10 @@ export const addNewProduct = (newProduct) => {
   return (dispatch) => {
     ApiHelper.post(newProduct, "admins/products")
       .then((response) => response.json())
-      .then((json) => dispatch(showModal()));
+      .then((json) => {
+        dispatch(showModal());
+        console.log(json.errors);
+      });
   };
 };
 
@@ -57,14 +56,6 @@ export const updateChosenProduct = (id) => {
         (json) => alert(`Updated product id: ${json.update.id}`),
         window.location.reload(false)
       );
-  };
-};
-
-export const checkIfClientExist = (clientParams) => {
-  return (dispatch) => {
-    ApiHelper.post(clientParams, "clients/login")
-      .then((response) => response.json())
-      .then((json) => alert(json.response));
   };
 };
 
