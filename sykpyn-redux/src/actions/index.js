@@ -8,7 +8,7 @@ import {
   FILTER_PRODUCTS,
 } from "../constants";
 import { ApiHelper } from "../helpers";
-import { showModal } from "./authorization";
+import { showSuccessRegisterModal } from "./authorization";
 
 export const fetchProducts = () => {
   return (dispatch) => {
@@ -18,28 +18,21 @@ export const fetchProducts = () => {
   };
 };
 
-export const addNewClient = (newClient) => {
-  return (dispatch) => {
-    ApiHelper.post(newClient, "clients")
-      .then((response) => response.json())
-      .then((json) => dispatch(showModal()));
-  };
-};
-
 export const addNewProduct = (newProduct) => {
   return (dispatch) => {
-    ApiHelper.post(newProduct, "admins/products")
-      .then((response) => response.json())
+    ApiHelper.post("admins/products", newProduct)
+      .then((response) => {
+        response.json();
+      })
       .then((json) => {
-        dispatch(showModal());
-        console.log(json.errors);
+        dispatch(showSuccessRegisterModal());
       });
   };
 };
 
 export const deleteChosenProduct = (id) => {
   return (dispatch) => {
-    ApiHelper.delete(id, "admins/products")
+    ApiHelper.delete("admins/products", id)
       .then((response) => response.json())
       .then(
         (json) => alert(`Deleted product: ${json.deleted_product.title}`),
@@ -50,7 +43,7 @@ export const deleteChosenProduct = (id) => {
 
 export const updateChosenProduct = (id) => {
   return (dispatch) => {
-    ApiHelper.update(id, "admins/products")
+    ApiHelper.update("admins/products", id)
       .then((response) => response.json())
       .then(
         (json) => alert(`Updated product id: ${json.update.id}`),

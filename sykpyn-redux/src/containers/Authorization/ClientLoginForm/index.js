@@ -1,9 +1,13 @@
 import React from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Modal } from "react-bootstrap";
 import { connect } from "react-redux";
-import { checkIfClientExist } from "../../../actions/authorization";
+import {
+  checkIfClientExist,
+  closeErrorModal,
+} from "../../../actions/authorization";
+import ErrorModal from '../../Modal/errorModal'
 
-class LoginForm extends React.Component {
+class ClientLoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,12 +22,11 @@ class LoginForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    let new_client = {
+    let client_params = {
       email: this.state.email,
       password: this.state.password,
     };
-    console.log(this.props.history)
-    this.props.checkIfClientExist(new_client, this.props.history);
+    this.props.checkIfClientExist(client_params, this.props.history);
   };
 
   handleInputChange = (e) => {
@@ -59,11 +62,16 @@ class LoginForm extends React.Component {
             Login
           </Button>
         </Form>
+        <ErrorModal />
       </Container>
     );
   }
 }
 
-const mapDispatchToProps = { checkIfClientExist };
+const mapStateToProps = (state) => ({
+  showErrorModal: state.authorization.showErrorModal,
+});
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+const mapDispatchToProps = { checkIfClientExist, closeErrorModal };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClientLoginForm);

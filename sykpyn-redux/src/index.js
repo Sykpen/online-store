@@ -13,13 +13,13 @@ import Contacts from "./components/Contacts";
 import AdminDashboard from "./containers/AdminDashboard";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import SignInForm from "./containers/Authorization/SignInForm";
+import RegisterForm from "./containers/Authorization/RegisterForm";
 import ClientProfile from "./containers/ClientProfile";
-import LoginForm from "./containers/Authorization/LoginForm";
-import PrivateRoute from "./helpers/PrivateRouter";
+import ClientLoginForm from "./containers/Authorization/ClientLoginForm";
+import ClientPrivateRoute from "./helpers/clientPrivateRoute";
 import Header from "./components/Header";
-import PrivateRouteForAdmin from "./helpers/PrivateRouterForAdmin";
-import AdminForm from "./containers/Authorization/AdminForm";
+import AdminPrivateRoute from "./helpers/AdminPrivateRoute";
+import AdminRegistrationForm from "./containers/Authorization/AdminRegistrationForm";
 
 const store = createStore(
   rootReducer,
@@ -34,20 +34,20 @@ ReactDOM.render(
           <Header />
           <Switch>
             <Route exact path="/" component={MainSection} />
-            <PrivateRouteForAdmin
+            <AdminPrivateRoute
               exact
               path="/admin_dashboard"
               component={AdminDashboard}
             />
-            <PrivateRoute exact path="/contacts" component={Contacts} />
-            <PrivateRoute exact path="/sign_in" component={SignInForm} />
-            <PrivateRoute
+            <Route exact path="/contacts" component={Contacts} />
+            <Route exact path="/sign_in" component={RegisterForm} />
+            <ClientPrivateRoute
               exact
               path="/client_profile"
               component={ClientProfile}
             />
-            <Route exact path="/admin_login" component={AdminForm} />
-            <Route exact path="/login" component={LoginForm} />
+            <Route exact path="/admin_login" component={AdminRegistrationForm} />
+            <Route exact path="/login" component={ClientLoginForm} />
           </Switch>
         </Router>
       </Main>

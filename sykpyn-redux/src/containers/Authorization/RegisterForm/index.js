@@ -1,15 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Form, Button, Container } from "react-bootstrap";
-import { addNewClient } from "../../../actions/authorization";
+import { registerClient } from "../../../actions/authorization";
 
-class SignInForm extends React.Component {
+class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
       address: "",
+      name: "",
+      nickName: "",
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,13 +20,15 @@ class SignInForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    let new_client = {
+    let client_params = {
       email: this.state.email,
       password: this.state.password,
       address: this.state.address,
+      name: this.state.name,
+      nick_name: this.state.nickName,
     };
 
-    this.props.addNewClient(new_client);
+    this.props.registerClient(client_params);
   };
 
   handleInputChange = (e) => {
@@ -36,6 +40,24 @@ class SignInForm extends React.Component {
     return (
       <Container>
         <Form>
+        <Form.Group controlId="formBasicEmail">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="name"
+              placeholder="Enter name"
+              name="name"
+              onChange={this.handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Nick name</Form.Label>
+            <Form.Control
+              type="nickName"
+              placeholder="Enter nick name"
+              name="nickName"
+              onChange={this.handleInputChange}
+            />
+          </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -74,6 +96,6 @@ class SignInForm extends React.Component {
   }
 }
 
-const mapDispatchToProps = { addNewClient };
+const mapDispatchToProps = { registerClient };
 
-export default connect(null, mapDispatchToProps)(SignInForm);
+export default connect(null, mapDispatchToProps)(RegisterForm);

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { deleteChosenProduct, updateChosenProduct } from "../../../actions";
+import { deleteChosenProduct, updateChosenProduct } from "../../../actions/admin";
 import { Card, Button } from "react-bootstrap";
 
 class ProductItemForAdminPage extends Component {

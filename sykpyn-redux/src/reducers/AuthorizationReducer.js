@@ -1,14 +1,18 @@
 import {
-  SHOW_MODAL,
-  CLOSE_MODAL,
+  SWOW_SUCCESS_REGISTER_MODAL,
+  CLOSE_SUCCESS_REGISTER_MODAL,
   LOGIN_CLIENT,
   LOGIN_ADMIN,
+  SWOW_ERROR_MODAL,
+  CLOSE_ERROR_MODAL,
 } from "../constants";
 
 const initialState = {
-  showModal: false,
+  showSuccessRegisterModal: false,
+  showErrorModal: false,
   isLoggedIn: false,
   isAdmin: false,
+  currentLoginClientData: [],
 };
 
 export const AuthorizationReducer = (state = initialState, action) => {
@@ -22,16 +26,27 @@ export const AuthorizationReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
+        currentLoginClientData: action.data
       };
-    case SHOW_MODAL:
+    case SWOW_SUCCESS_REGISTER_MODAL:
       return {
         ...state,
-        showModal: true,
+        showSuccessRegisterModal: true,
       };
-    case CLOSE_MODAL:
+    case SWOW_ERROR_MODAL:
       return {
         ...state,
-        showModal: false,
+        showErrorModal: true, 
+      };
+    case CLOSE_ERROR_MODAL:
+      return {
+        ...state,
+        showErrorModal: false,
+      };
+    case CLOSE_SUCCESS_REGISTER_MODAL:
+      return {
+        ...state,
+        showSuccessRegisterModal: false,
       };
     default:
       return state;

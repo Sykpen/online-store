@@ -1,9 +1,10 @@
 import React from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Modal } from "react-bootstrap";
 import { connect } from "react-redux";
-import { adminLogin } from "../../../actions/authorization";
+import { adminLogin, closeErrorModal } from "../../../actions/authorization";
+import ErrorModal from "../../Modal/errorModal";
 
-class AdminForm extends React.Component {
+class AdminRegistrationForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,15 +20,14 @@ class AdminForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    let admin = {
+    let admin_params = {
       nick_name: this.state.nickName,
       first_name: this.state.firstName,
       last_name: this.state.lastName,
       password: this.state.password,
     };
 
-    console.log(this.props.history);
-    this.props.adminLogin(admin, this.props.history);
+    this.props.adminLogin(admin_params, this.props.history);
   };
 
   handleInputChange = (e) => {
@@ -75,11 +75,19 @@ class AdminForm extends React.Component {
             Login
           </Button>
         </Form>
+        <ErrorModal />
       </Container>
     );
   }
 }
 
-const mapDispatchToProps = { adminLogin };
+const mapStateToProps = (state) => ({
+  showErrorModal: state.authorization.showErrorModal,
+});
 
-export default connect(null, mapDispatchToProps)(AdminForm);
+const mapDispatchToProps = { adminLogin, closeErrorModal };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminRegistrationForm);

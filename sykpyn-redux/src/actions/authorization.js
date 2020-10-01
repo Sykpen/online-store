@@ -1,44 +1,50 @@
 import {
-  SHOW_MODAL,
-  CLOSE_MODAL,
+  SWOW_SUCCESS_REGISTER_MODAL,
+  CLOSE_SUCCESS_REGISTER_MODAL,
   LOGIN_CLIENT,
   LOGIN_ADMIN,
+  SWOW_ERROR_MODAL,
+  CLOSE_ERROR_MODAL,
 } from "../constants";
 import { ApiHelper } from "../helpers";
 
-export const showModal = () => ({ type: SHOW_MODAL });
-export const closeModal = () => ({ type: CLOSE_MODAL });
-export const loginClient = () => ({ type: LOGIN_CLIENT });
+export const showSuccessRegisterModal = () => ({ type: SWOW_SUCCESS_REGISTER_MODAL });
+export const closeSuccessRegisterModal = () => ({ type: CLOSE_SUCCESS_REGISTER_MODAL });
+export const showErrorModal = () => ({ type: SWOW_ERROR_MODAL });
+export const closeErrorModal = () => ({ type: CLOSE_ERROR_MODAL });
+export const loginClient = (data) => ({ type: LOGIN_CLIENT, data: data });
 export const loginAdmin = () => ({ type: LOGIN_ADMIN });
 
-export const setStoreFromLocal = () => {
+export const setStoreFromLocalStorage = () => {
   return (dispatch) => {
     let isLoggedIn = localStorage.getItem("isLoggedIn");
+    let clientData = JSON.parse(localStorage.getItem("clientData"));
     if (isLoggedIn) {
-      dispatch(loginClient());
+      dispatch(loginClient(clientData));
     }
   };
 };
 
-export const addNewClient = (newClient) => {
+export const registerClient = (newClient) => {
   return (dispatch) => {
-    ApiHelper.post(newClient, "clients")
+    ApiHelper.post("clients", newClient)
       .then((response) => response.json())
-      .then((json) => dispatch(showModal()));
+      .then((json) => dispatch(showSuccessRegisterModal()));
   };
 };
 
 export const checkIfClientExist = (clientParams, history) => {
   return (dispatch) => {
-    ApiHelper.post(clientParams, "clients/login")
+    ApiHelper.post("clients/login", clientParams)
       .then((response) => response.json())
       .then((json) => {
         if (json.response === "Login done") {
           dispatch(loginClient());
           localStorage.setItem("isLoggedIn", true);
-          return history.push(history.path);
+          localStorage.setItem("clientData", JSON.stringify(json.client_data));
+          return history.push('/client_profile');
         } else {
-          return console.log(`${json.response}`);
+          return dispatch(showErrorModal());
         }
       });
   };
@@ -46,13 +52,14 @@ export const checkIfClientExist = (clientParams, history) => {
 
 export const adminLogin = (clientParams, history) => {
   return (dispatch) => {
-    ApiHelper.post(clientParams, "admins/login_admin")
+    ApiHelper.post("admins/login", clientParams)
       .then((response) => response.json())
       .then((json) => {
         if (json.response === "Admin here, watchout") {
+          dispatch(loginAdmin())
           return history.push("/admin_dashboard");
         } else {
-          return console.log(`${json.response}`);
+          return dispatch(showErrorModal());
         }
       });
   };

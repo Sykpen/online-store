@@ -7,9 +7,11 @@ import {
   Col,
 } from "react-bootstrap";
 import "./style.css";
+import { connect } from "react-redux";
 
 class ClientCabinet extends Component {
   render() {
+    console.log(this.props.currentLoginClientData);
     return (
       <Container>
         <div className="profile_page_wrapper">
@@ -30,7 +32,7 @@ class ClientCabinet extends Component {
                 <InputGroup.Text id="basic-addon1">Name</InputGroup.Text>
               </InputGroup.Prepend>
               <FormControl
-                placeholder="Cергей"
+                placeholder={this.props.currentLoginClientData.name}
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
@@ -41,8 +43,8 @@ class ClientCabinet extends Component {
                 <InputGroup.Text id="basic-addon1">Nickname</InputGroup.Text>
               </InputGroup.Prepend>
               <FormControl
-                placeholder="Sykpyn"
-                aria-label="Recipient's username"
+                placeholder={this.props.currentLoginClientData.nick_name}
+                aria-label="Nickname"
                 aria-describedby="basic-addon1"
               />
             </InputGroup>
@@ -54,7 +56,7 @@ class ClientCabinet extends Component {
               <FormControl
                 id="basic-url"
                 aria-describedby="basic-addon3"
-                placeholder="example@yandex.ru"
+                placeholder={this.props.currentLoginClientData.email}
               />
             </InputGroup>
 
@@ -80,15 +82,15 @@ class ClientCabinet extends Component {
           </div>
           <div className="main_section_wrapper">
             <div className="bonuses">
-              <h4>Мои бонусы : 0</h4>
+              <h4>Your bonuses : 0</h4>
               <hr></hr>
-              <p>Выберите бонусы</p>
-              <div>Тут будут бонусы</div>
+              <p>Choose bonus:</p>
+              <div>Bonuses will display here</div>
             </div>
             <div className="orders_history">
-              <h4>История заказов</h4>
+              <h4>Order history</h4>
               <hr></hr>
-              <div>Тут будут заказы из БД</div>
+              <div>Orders</div>
             </div>
           </div>
         </div>
@@ -97,4 +99,8 @@ class ClientCabinet extends Component {
   }
 }
 
-export default ClientCabinet;
+const mapStateToProps = (state) => ({
+  currentLoginClientData: state.authorization.currentLoginClientData,
+});
+
+export default connect(mapStateToProps, null)(ClientCabinet);

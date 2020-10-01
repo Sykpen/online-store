@@ -26,20 +26,19 @@ export class ApiHelper {
     return fetch(`${BASE_HOST}/${path}`);
   }
 
-  static post(product, path) {
-    console.log(product, path)
+  static post(path, product) {
     let requestOptions = buildRequestOptions("POST", product);
     return fetch(`${BASE_HOST}/${path}`, requestOptions);
   }
 
-  static delete(id, path) {
+  static delete(path, id) {
     let arrayWithId = { id: id };
     const url = `${BASE_HOST}/${path}/${id}`;
     let requestOptions = buildRequestOptions("DELETE", arrayWithId);
     return fetch(url, requestOptions);
   }
 
-  static update(id, path) {
+  static update(path, id) {
     let updateTitleArray = { id: id, title: "New title after Update" };
     const url = `${BASE_HOST}/${path}/${id}`;
     let requestOptions = buildRequestOptions("PUT", updateTitleArray);
