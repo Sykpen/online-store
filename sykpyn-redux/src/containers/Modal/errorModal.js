@@ -3,21 +3,15 @@ import { connect } from "react-redux";
 import { closeErrorModal } from "../../actions/authorization";
 import { Modal, Button } from "react-bootstrap";
 
-const ErrorModal = () => {
+const ErrorModal = ({ closeErrorModal, showErrorModal }) => {
   return (
-    <Modal
-      show={this.props.showErrorModal}
-      onHide={() => this.props.closeErrorModal()}
-    >
+    <Modal show={showErrorModal} onHide={() => closeErrorModal()}>
       <Modal.Header closeButton>
         <Modal.Title>Report</Modal.Title>
       </Modal.Header>
       <Modal.Body>Error: try one more time!</Modal.Body>
       <Modal.Footer>
-        <Button
-          variant="secondary"
-          onClick={() => this.props.closeErrorModal()}
-        >
+        <Button variant="secondary" onClick={() => closeErrorModal()}>
           Close
         </Button>
       </Modal.Footer>

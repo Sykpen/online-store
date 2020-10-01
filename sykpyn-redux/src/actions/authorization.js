@@ -8,8 +8,12 @@ import {
 } from "../constants";
 import { ApiHelper } from "../helpers";
 
-export const showSuccessRegisterModal = () => ({ type: SWOW_SUCCESS_REGISTER_MODAL });
-export const closeSuccessRegisterModal = () => ({ type: CLOSE_SUCCESS_REGISTER_MODAL });
+export const showSuccessRegisterModal = () => ({
+  type: SWOW_SUCCESS_REGISTER_MODAL,
+});
+export const closeSuccessRegisterModal = () => ({
+  type: CLOSE_SUCCESS_REGISTER_MODAL,
+});
 export const showErrorModal = () => ({ type: SWOW_ERROR_MODAL });
 export const closeErrorModal = () => ({ type: CLOSE_ERROR_MODAL });
 export const loginClient = (data) => ({ type: LOGIN_CLIENT, data: data });
@@ -42,7 +46,7 @@ export const checkIfClientExist = (clientParams, history) => {
           dispatch(loginClient());
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("clientData", JSON.stringify(json.client_data));
-          return history.push('/client_profile');
+          return history.push("/client_profile");
         } else {
           return dispatch(showErrorModal());
         }
@@ -56,7 +60,7 @@ export const adminLogin = (clientParams, history) => {
       .then((response) => response.json())
       .then((json) => {
         if (json.response === "Admin here, watchout") {
-          dispatch(loginAdmin())
+          dispatch(loginAdmin());
           return history.push("/admin_dashboard");
         } else {
           return dispatch(showErrorModal());

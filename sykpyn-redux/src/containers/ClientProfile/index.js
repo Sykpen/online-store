@@ -11,7 +11,6 @@ import { connect } from "react-redux";
 
 class ClientCabinet extends Component {
   render() {
-    console.log(this.props.currentLoginClientData);
     return (
       <Container>
         <div className="profile_page_wrapper">
