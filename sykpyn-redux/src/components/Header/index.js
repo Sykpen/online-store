@@ -2,8 +2,10 @@ import React from "react";
 import { Navbar, Button, Nav, Form, FormControl } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { loginClient, logoutClient } from "../../actions/authorization";
 
-function Header() {
+function Header({ loginClient, logoutClient }) {
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (language) => {
@@ -23,16 +25,17 @@ function Header() {
           EN
         </Button>
       </Nav>
-      <Form inline>
-        <FormControl
-          type="text"
-          placeholder={t("search")}
-          className="mr-sm-2"
-        />
-        <Button variant="outline-primary">{t("search")}</Button>
-      </Form>
+      <Button variant="outline-primary">{t("search")}</Button>
+      <Button variant="outline-primary" onClick={() => loginClient()}>
+        {t("login")}
+      </Button>
+      <Button variant="outline-primary" onClick={() => logoutClient()}>
+        {t("logout")}
+      </Button>
     </Navbar>
   );
 }
 
-export default Header;
+const mapDispatchToProps = { loginClient, logoutClient };
+
+export default connect(null, mapDispatchToProps)(Header);

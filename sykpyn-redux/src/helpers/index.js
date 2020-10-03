@@ -31,17 +31,15 @@ export class ApiHelper {
     return fetch(`${BASE_HOST}/${path}`, requestOptions);
   }
 
-  static delete(path, id) {
-    let arrayWithId = { id: id };
-    const url = `${BASE_HOST}/${path}/${id}`;
-    let requestOptions = buildRequestOptions("DELETE", arrayWithId);
+  static delete(path) {
+    const url = `${BASE_HOST}/${path}`;
+    let requestOptions = buildRequestOptions("DELETE");
     return fetch(url, requestOptions);
   }
 
-  static update(path, id) {
-    let updateTitleArray = { id: id, title: "New title after Update" };
+  static update(path, id, updateProperties) {
     const url = `${BASE_HOST}/${path}/${id}`;
-    let requestOptions = buildRequestOptions("PUT", updateTitleArray);
+    let requestOptions = buildRequestOptions("PUT", updateProperties);
     return fetch(url, requestOptions);
   }
 }

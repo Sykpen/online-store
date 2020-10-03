@@ -17,6 +17,8 @@ const resources = {
       cleanAll: "Clean All",
       addToCart: "Add to cart",
       search: "Search",
+      login: "Login",
+      logout: "Logout",
       cardText:
         "Best pizzas in town. {{price}} only. Harry up. The offer is limited ({{amount}} left).",
     },
@@ -36,6 +38,8 @@ const resources = {
       cleanAll: "Очистить корзину!",
       addToCart: "Добавить в корзину",
       search: "Искать",
+      login: "Войти",
+      logout: "Выйти",
       cardText:
         "Изысканая пицца по доступной цене. Всего {{price}} рублей. Успей купить. Предложение ограничено (осталось {{amount}} штук).",
     },

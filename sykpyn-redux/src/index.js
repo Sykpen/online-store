@@ -46,7 +46,11 @@ ReactDOM.render(
               path="/client_profile"
               component={ClientProfile}
             />
-            <Route exact path="/admin_login" component={AdminRegistrationForm} />
+            <Route
+              exact
+              path="/admin_login"
+              component={AdminRegistrationForm}
+            />
             <Route exact path="/login" component={ClientLoginForm} />
           </Switch>
         </Router>

@@ -1,6 +1,10 @@
 import React, { Fragment } from "react";
-import { closeSuccessRegisterModal, closeErrorModal } from "../../actions/authorization";
-import { addNewProduct, fetchProducts } from "../../actions";
+import {
+  closeSuccessModal,
+  closeErrorModal,
+} from "../../actions/authorization";
+import { fetchProducts } from "../../actions";
+import { addNewProduct } from "../../actions/admin";
 import { connect } from "react-redux";
 import ProductsForAdminPage from "../ProductsForAdminPage";
 import "./style.css";
@@ -10,7 +14,6 @@ class AdminDashboard extends React.Component {
   componentDidMount() {
     return this.props.fetchProducts();
   }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -104,8 +107,8 @@ class AdminDashboard extends React.Component {
           </form>
         </div>
         <Modal
-          show={this.props.showSuccessRegisterModal}
-          onHide={() => this.props.closeSuccessRegisterModal()}
+          show={this.props.showSuccessModal}
+          onHide={() => this.props.closeSuccessModal()}
         >
           <Modal.Header closeButton>
             <Modal.Title>Report</Modal.Title>
@@ -114,7 +117,7 @@ class AdminDashboard extends React.Component {
           <Modal.Footer>
             <Button
               variant="secondary"
-              onClick={() => this.props.closeSuccessRegisterModal()}
+              onClick={() => this.props.closeSuccessModal()}
             >
               Close
             </Button>
@@ -126,14 +129,14 @@ class AdminDashboard extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  showSuccessRegisterModal: state.authorization.showSuccessRegisterModal,
+  showSuccessModal: state.authorization.showSuccessModal,
   showErrorModal: state.authorization.showErrorModal,
 });
 
 const mapDispatchToProps = {
   addNewProduct,
   fetchProducts,
-  closeSuccessRegisterModal,
+  closeSuccessModal,
   closeErrorModal,
 };
 

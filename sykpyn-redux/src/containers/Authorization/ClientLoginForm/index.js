@@ -5,7 +5,7 @@ import {
   checkIfClientExist,
   closeErrorModal,
 } from "../../../actions/authorization";
-import ErrorModal from '../../Modal/errorModal'
+import ErrorModal from "../../Modal/errorModal";
 
 class ClientLoginForm extends React.Component {
   constructor(props) {

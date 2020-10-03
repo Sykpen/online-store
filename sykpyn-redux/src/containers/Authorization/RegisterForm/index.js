@@ -40,7 +40,7 @@ class RegisterForm extends React.Component {
     return (
       <Container>
         <Form>
-        <Form.Group controlId="formBasicEmail">
+          <Form.Group controlId="formBasicEmail">
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="name"

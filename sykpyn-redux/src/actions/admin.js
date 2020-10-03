@@ -1,37 +1,34 @@
 import { ApiHelper } from "../helpers";
-import { showSuccessRegisterModal } from "./authorization";
+import { showSuccessModal } from "./authorization";
 
 export const addNewProduct = (newProduct) => {
-    return (dispatch) => {
-      ApiHelper.post("admins/products", newProduct)
-        .then((response) => {
-          console.log(response);
-          response.json();
-        })
-        .then((json) => {
-          dispatch(showSuccessRegisterModal());
-        });
-    };
+  return (dispatch) => {
+    ApiHelper.post("admins/products", newProduct)
+      .then((response) => {
+        response.json();
+      })
+      .then(() => {
+        dispatch(showSuccessModal());
+      });
   };
-  
-  export const deleteChosenProduct = (id) => {
-    return (dispatch) => {
-      ApiHelper.delete("admins/products", id)
-        .then((response) => response.json())
-        .then(
-          (json) => alert(`Deleted product: ${json.deleted_product.title}`),
-          window.location.reload(false)
-        );
-    };
+};
+
+export const deleteChosenProduct = (id, history) => {
+  return () => {
+    ApiHelper.delete(`admins/products/${id}`)
+      .then((response) => response.json())
+      .then(() => {});
   };
-  
-  export const updateChosenProduct = (id) => {
-    return (dispatch) => {
-      ApiHelper.update("admins/products", id)
-        .then((response) => response.json())
-        .then(
-          (json) => alert(`Updated product id: ${json.update.id}`),
-          window.location.reload(false)
-        );
-    };
+};
+
+export const updateChosenProduct = (id, history) => {
+  let updateTitleArray = { id: id, title: "New title after Update" };
+  return (dispatch) => {
+    ApiHelper.update("admins/products", id, updateTitleArray)
+      .then((response) => response.json())
+      .then(
+        (json) => alert(`Updated product id: ${json.update.id}`),
+        history.go(0)
+      );
   };
+};
