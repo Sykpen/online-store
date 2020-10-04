@@ -6,50 +6,15 @@ import {
   REMOVE_CHOSEN_TYPE,
   RECEIVE_PPODUCTS,
   FILTER_PRODUCTS,
-  SHOW_MODAL,
-  CLOSE_MODAL,
+  SET_CURRENT_CLIENT_DATA,
 } from "../constants";
-import fetch from "cross-fetch";
 import { ApiHelper } from "../helpers";
-
-export const showModal = () => ({ type: SHOW_MODAL });
-export const closeModal = () => ({ type: CLOSE_MODAL });
 
 export const fetchProducts = () => {
   return (dispatch) => {
     ApiHelper.get("products")
       .then((response) => response.json())
-      .then((json) => dispatch(receiveProducts(json)));
-  };
-};
-
-export const addNewProduct = (newProduct) => {
-  return (dispatch) => {
-    ApiHelper.post(newProduct, "products")
-      .then((response) => response.json())
-      .then((json) => dispatch(showModal()));
-  };
-};
-
-export const deleteChosenProduct = (id) => {
-  return (dispatch) => {
-    ApiHelper.delete(id, "products")
-      .then((response) => response.json())
-      .then(
-        (json) => alert(`Deleted product: ${json.deleted_product.title}`),
-        window.location.reload(false)
-      );
-  };
-};
-
-export const updateChosenProduct = (id) => {
-  return (dispatch) => {
-    ApiHelper.update(id, "products")
-      .then((response) => response.json())
-      .then(
-        (json) => alert(`Updated product id: ${json.update.id}`),
-        window.location.reload(false)
-      );
+      .then((parsedResponse) => dispatch(receiveProducts(parsedResponse)));
   };
 };
 
@@ -74,4 +39,19 @@ export const removeChosenType = (id) => ({
 export const filterProducts = (filterProductTypes) => ({
   type: FILTER_PRODUCTS,
   filterProductTypes,
+});
+
+export const getCurrentClientData = (id) => {
+  return (dispatch) => {
+    ApiHelper.get(`clients/${id}`)
+      .then((responce) => responce.json())
+      .then((data) => {
+        dispatch(setCurrentClientData(data.client));
+      });
+  };
+};
+
+export const setCurrentClientData = (ClientData) => ({
+  type: SET_CURRENT_CLIENT_DATA,
+  data: ClientData,
 });
