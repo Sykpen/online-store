@@ -4,9 +4,9 @@ import { showSuccessModal } from "./authorization";
 export const addNewProduct = (newProduct) => {
   return (dispatch) => {
     ApiHelper.post("admins/products", newProduct)
-      .then((response) => {
-        response.json();
-      })
+      // .then((response) => {
+      //   response.json();
+      // })
       .then(() => {
         dispatch(showSuccessModal());
       });
@@ -15,9 +15,7 @@ export const addNewProduct = (newProduct) => {
 
 export const deleteChosenProduct = (id, history) => {
   return () => {
-    ApiHelper.delete(`admins/products/${id}`)
-      .then((response) => response.json())
-      .then(() => {});
+    ApiHelper.delete(`admins/products/${id}`).then(history.go(0));
   };
 };
 
@@ -27,7 +25,8 @@ export const updateChosenProduct = (id, history) => {
     ApiHelper.update("admins/products", id, updateTitleArray)
       .then((response) => response.json())
       .then(
-        (json) => alert(`Updated product id: ${json.update.id}`),
+        (parsedResponse) =>
+          alert(`Updated product id: ${parsedResponse.update.id}`),
         history.go(0)
       );
   };

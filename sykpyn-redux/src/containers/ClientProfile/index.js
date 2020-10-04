@@ -13,7 +13,7 @@ import { showDepositModal } from "../../actions/modal";
 import DepositModal from "./DepositModal";
 import { getCurrentClientData } from "../../actions";
 
-class ClientCabinet extends Component {
+class ClientProfile extends Component {
   componentDidMount() {
     return this.props.getCurrentClientData(this.props.currentLoginClientId);
   }
@@ -170,4 +170,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { showDepositModal, getCurrentClientData };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClientCabinet);
+export default connect(mapStateToProps, mapDispatchToProps)(ClientProfile);

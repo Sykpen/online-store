@@ -15,10 +15,6 @@ class DepositModal extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    return this.props.getCurrentClientData(this.props.currentLoginClientId);
-  }
-
   handleSubmit = () => {
     let updateDeposit = {
       id: this.props.currentLoginClientId,
@@ -82,7 +78,7 @@ class DepositModal extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  showDepositModal: state.modal.showDepositModal,
+  showDepositModal: state.modals.showDepositModal,
   currentLoginClientId: state.authorization.currentLoginClientId,
 });
 

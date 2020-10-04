@@ -14,7 +14,7 @@ export const fetchProducts = () => {
   return (dispatch) => {
     ApiHelper.get("products")
       .then((response) => response.json())
-      .then((json) => dispatch(receiveProducts(json)));
+      .then((parsedResponse) => dispatch(receiveProducts(parsedResponse)));
   };
 };
 

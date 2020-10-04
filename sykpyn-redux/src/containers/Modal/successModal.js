@@ -20,7 +20,7 @@ const SuccessModal = ({ showSuccessModal, closeSuccessModal }) => {
 };
 
 const mapStateToProps = (state) => ({
-  showSuccessModal: state.modal.showSuccessModal,
+  showSuccessModal: state.modals.showSuccessModal,
 });
 
 const mapDispatchToProps = { closeSuccessModal };

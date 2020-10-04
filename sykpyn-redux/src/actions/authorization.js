@@ -8,7 +8,6 @@ import {
   LOGOUT_CLIENT,
 } from "../constants";
 import { ApiHelper } from "../helpers";
-import { setCurrentClientData } from "./index";
 
 export const showSuccessModal = () => ({
   type: SWOW_SUCCESS_MODAL,
@@ -23,15 +22,13 @@ export const loginAdmin = () => ({ type: LOGIN_ADMIN });
 
 export const logoutClient = () => {
   localStorage.setItem("currentClientID", null);
-  localStorage.setItem("isLoggedIn", false);
   return { type: LOGOUT_CLIENT };
 };
 
 export const setStoreFromLocalStorage = () => {
   return (dispatch) => {
-    let isLoggedIn = localStorage.getItem("isLoggedIn");
     let currentClientID = localStorage.getItem("currentClientID");
-    if (isLoggedIn) {
+    if (currentClientID) {
       dispatch(loginClient(currentClientID));
     }
   };
@@ -39,9 +36,9 @@ export const setStoreFromLocalStorage = () => {
 
 export const registerClient = (newClient) => {
   return (dispatch) => {
-    ApiHelper.post("clients", newClient)
-      .then((response) => response.json())
-      .then(() => dispatch(showSuccessModal()));
+    ApiHelper.post("clients", newClient).then(() =>
+      dispatch(showSuccessModal())
+    );
   };
 };
 
@@ -49,12 +46,10 @@ export const checkIfClientExist = (clientParams, history) => {
   return (dispatch) => {
     ApiHelper.post("clients/login", clientParams)
       .then((response) => response.json())
-      .then((json) => {
-        if (json.message === "Login done") {
-          localStorage.setItem("isLoggedIn", true);
-          dispatch(setCurrentClientData(json.client));
-          localStorage.setItem("currentClientID", json.client.id);
-          dispatch(loginClient());
+      .then((parsedResponse) => {
+        if (parsedResponse.status === 200) {
+          localStorage.setItem("currentClientID", parsedResponse.client.id);
+          dispatch(loginClient(parsedResponse.client.id));
           return history.push("/client_profile");
         } else {
           return dispatch(showErrorModal());

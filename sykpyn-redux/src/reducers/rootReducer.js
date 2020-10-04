@@ -7,6 +7,6 @@ import { ClientReducer } from "./ClientReducer";
 export const rootReducer = combineReducers({
   productItems: ProductItemsReducer,
   authorization: AuthorizationReducer,
-  modal: ModalWindowReducer,
+  modals: ModalWindowReducer,
   client: ClientReducer,
 });
