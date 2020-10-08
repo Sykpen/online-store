@@ -20,10 +20,10 @@ class MainSection extends Component {
         <div className="container">
           <div className="pt-3 d-flex">
             <div className="d-flex justify-content-around align-items-center flex-grow-1 flex-wrap">
-              <FilterArea
+              {/* <FilterArea
                 filterProducts={this.props.filterProducts}
                 stableProductCopy={stableProductCopy}
-              />
+              /> */}
               <ProductItems />
             </div>
             <div className="flex-shrink-0">

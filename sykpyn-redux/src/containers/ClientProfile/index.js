@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { showDepositModal } from "../../actions/modal";
 import DepositModal from "./DepositModal";
 import { getCurrentClientData } from "../../actions";
+import ClientOrdersHistory from "./OrdersHistory";
 
 class ClientProfile extends Component {
   componentDidMount() {
@@ -146,7 +147,9 @@ class ClientProfile extends Component {
             <div className="orders_history">
               <h4>Order history</h4>
               <hr></hr>
-              <div>Orders</div>
+              <div>
+                <ClientOrdersHistory />
+              </div>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { ApiHelper } from "../helpers";
-import { showSuccessModal, showErrorModal } from "./modal";
+import { showSuccessModal } from "./modal";
 import { setCurrentClientData } from "../actions";
 
 export const updateClientBalance = (id, updateProperties) => {

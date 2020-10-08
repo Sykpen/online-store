@@ -9,6 +9,7 @@ import {
 import CartItem from "../../components/CartItem";
 import "./cart.css";
 import { useTranslation } from "react-i18next";
+import { setOrderInfoToDb, getAllOrders } from "../../actions/order";
 
 const Cart = ({
   cleanCart,
@@ -17,8 +18,23 @@ const Cart = ({
   addOneProduct,
   deleteOneProduct,
   removeChosenType,
+  currentLoginClientId,
+  setOrderInfoToDb,
 }) => {
   const { t, i18n } = useTranslation();
+
+  const createOrder = () => {
+    let totalOrderPrice = 0;
+    productsAddedToCart.forEach((product) => {
+      totalOrderPrice += product.totalPriceForOneProduct 
+    });
+    let orderParams = {
+      products_hash: productsAddedToCart,
+      client_id: currentLoginClientId,
+      total_order_price: totalOrderPrice
+    };
+    setOrderInfoToDb(orderParams);
+  };
 
   return (
     <Fragment>
@@ -46,6 +62,12 @@ const Cart = ({
             ))
           : t("noOrders")}
       </div>
+      <button
+        className="btn btn-success remove_all"
+        onClick={() => createOrder()}
+      >
+        {t("makeOrder")}
+      </button>
       <button className="btn btn-danger remove_all" onClick={() => cleanCart()}>
         {t("cleanAll")}
       </button>
@@ -57,6 +79,7 @@ const mapStateToProps = (state) => {
   return {
     productsAddedToCart: state.productItems.productsAddedToCart,
     showCart: state.productItems.showCart,
+    currentLoginClientId: state.authorization.currentLoginClientId,
   };
 };
 
@@ -65,6 +88,8 @@ const mapDispatchToProps = {
   addOneProduct,
   deleteOneProduct,
   removeChosenType,
+  setOrderInfoToDb,
+  getAllOrders,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

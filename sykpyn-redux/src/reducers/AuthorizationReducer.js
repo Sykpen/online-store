@@ -1,7 +1,7 @@
 import { LOGIN_CLIENT, LOGIN_ADMIN, LOGOUT_CLIENT } from "../constants";
 
 const initialState = {
-  isAdmin: false,
+  currentAdminId: false,
   currentLoginClientId: false,
 };
 
@@ -10,10 +10,9 @@ export const AuthorizationReducer = (state = initialState, action) => {
     case LOGIN_ADMIN:
       return {
         ...state,
-        isAdmin: true,
+        currentAdminId: action.id,
       };
     case LOGIN_CLIENT:
-      debugger;
       return {
         ...state,
         currentLoginClientId: action.id,

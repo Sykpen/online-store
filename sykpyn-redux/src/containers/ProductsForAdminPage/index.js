@@ -1,26 +1,44 @@
-import React from "react";
+import React, { Component, Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import ProductForAdminPage from "./ProductForAdminPage";
+import ProductChangeModal from "../Modal/updateProductModal";
+import { fetchProducts } from "../../actions";
 
-const ProductsForAdminPage = ({ products }) => {
-  if (!products) {
-    return <div>Информации пока нет, перезагрузите сайт.</div>;
+class ProductsForAdminPage extends Component {
+  render() {
+    const Product_cards = [];
+    this.props.products &&
+      this.props.products.forEach((product) => {
+        Product_cards.push(
+          <ProductForAdminPage
+            name={product.name}
+            title={product.title}
+            price={product.price}
+            amount={product.amount}
+            key={product.id}
+            id={product.id}
+            image={product.image}
+          />
+        );
+      });
+    return (
+      <Fragment>
+        {Product_cards}
+        <ProductChangeModal />
+      </Fragment>
+    );
   }
-  return products.map((product) => (
-    <ProductForAdminPage
-      name={product.name}
-      title={product.title}
-      price={product.price}
-      amount={product.amount}
-      key={product.id}
-      id={product.id}
-      image={product.image}
-    />
-  ));
-};
+}
 
 const mapStateToProps = (state) => ({
   products: state.productItems.products,
 });
 
-export default connect(mapStateToProps, null)(ProductsForAdminPage);
+const mapDispatchToProps = (state) => ({
+  fetchProducts,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductsForAdminPage);

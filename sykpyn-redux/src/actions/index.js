@@ -9,6 +9,7 @@ import {
   SET_CURRENT_CLIENT_DATA,
 } from "../constants";
 import { ApiHelper } from "../helpers";
+import { getAllOrdersForCurrentClient } from "./order";
 
 export const fetchProducts = () => {
   return (dispatch) => {
@@ -47,6 +48,7 @@ export const getCurrentClientData = (id) => {
       .then((responce) => responce.json())
       .then((data) => {
         dispatch(setCurrentClientData(data.client));
+        dispatch(getAllOrdersForCurrentClient(id));
       });
   };
 };

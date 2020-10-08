@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import ProductsForAdminPage from "../ProductsForAdminPage";
 import "./style.css";
 import { Modal, Button } from "react-bootstrap";
+import ProductChangeModal from "../Modal/updateProductModal";
 
 class AdminDashboard extends React.Component {
   componentDidMount() {
@@ -52,6 +53,9 @@ class AdminDashboard extends React.Component {
       <Fragment>
         <div className="flex_for_products">
           <ProductsForAdminPage />
+        </div>
+        <div>Clients List
+            
         </div>
         <div>
           <h1>New Product</h1>
@@ -106,6 +110,7 @@ class AdminDashboard extends React.Component {
             </p>
           </form>
         </div>
+        <ProductChangeModal />
         <Modal
           show={this.props.showSuccessModal}
           onHide={() => this.props.closeSuccessModal()}
@@ -131,6 +136,7 @@ class AdminDashboard extends React.Component {
 const mapStateToProps = (state) => ({
   showSuccessModal: state.authorization.showSuccessModal,
   showErrorModal: state.authorization.showErrorModal,
+  products: state.productItems.products,
 });
 
 const mapDispatchToProps = {

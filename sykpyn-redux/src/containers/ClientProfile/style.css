@@ -38,3 +38,13 @@
   background-color: #f8f8f8;
   border-radius: 5px;
 }
+
+.imageInOrderHistory {
+  width: 31%;
+  height: 70px;
+  object-fit: contain;
+}
+
+.test {
+  background-color: red;
+}
