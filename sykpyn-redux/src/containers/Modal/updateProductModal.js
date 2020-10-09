@@ -34,7 +34,6 @@ class ProductChangeModal extends React.Component {
   };
 
   handleInputChange = (e) => {
-    console.log(this.props.showProductChangeModal);
     this.setState({
       [e.target.name]: e.target.value,
     });

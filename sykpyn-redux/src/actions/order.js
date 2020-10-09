@@ -7,19 +7,16 @@ export const setOrderInfoToDb = (newOrder) => {
   return (dispatch) => {
     ApiHelper.post("orders", newOrder)
       .then((response) => response.json())
-      .then((parsedResponse) => {
+      .then(() => {
         dispatch(showSuccessModal());
       });
   };
 };
 
 export const getAllOrders = () => {
-  return (dispatch) => {
+  return () => {
     ApiHelper.get("orders")
       .then((response) => response.json())
-      .then((parsedResponse) => {
-        console.log(parsedResponse);
-      });
   };
 };
 
@@ -28,7 +25,6 @@ export const getAllOrdersForCurrentClient = (clientId) => {
     ApiHelper.get(`clients/${clientId}/orders`)
       .then((response) => response.json())
       .then((parsedResponse) => {
-        console.log(parsedResponse);
         dispatch(setCurrentClientOrders(parsedResponse.client_orders));
       });
   };

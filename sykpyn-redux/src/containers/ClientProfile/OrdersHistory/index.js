@@ -31,8 +31,6 @@ class ClientOrdersHistory extends Component {
         ordersListAfterFilter.push(order.products_hash)
       );
 
-    console.log(ordersListAfterFilter);
-
     ordersListAfterFilter &&
       ordersListAfterFilter.forEach((order) => {
         clientOrdersList.push(<OrderPack order={order} />);

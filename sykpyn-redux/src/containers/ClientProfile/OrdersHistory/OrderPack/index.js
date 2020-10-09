@@ -5,10 +5,8 @@ import { Button } from "react-bootstrap";
 class OrderPack extends Component {
   render() {
     const clientOrdersList = [];
-    let test = [];
-    console.log(this.props.order);
-    this.props.order.filter((order) => test.push(order.products_hash));
-    console.log(test);
+    let clientArray = [];
+    this.props.order.filter((order) => clientArray.push(order.products_hash));
     this.props.order &&
       this.props.order.forEach((order) => {
         clientOrdersList.push(
