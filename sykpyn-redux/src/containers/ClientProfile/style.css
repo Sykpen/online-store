@@ -53,10 +53,9 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-
 }
 
-.repeat_order_button{
+.repeat_order_button {
   margin: 0 auto;
-  margin-top:20px
+  margin-top: 20px;
 }

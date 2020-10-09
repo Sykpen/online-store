@@ -15,8 +15,7 @@ export const setOrderInfoToDb = (newOrder) => {
 
 export const getAllOrders = () => {
   return () => {
-    ApiHelper.get("orders")
-      .then((response) => response.json())
+    ApiHelper.get("orders").then((response) => response.json());
   };
 };
 
