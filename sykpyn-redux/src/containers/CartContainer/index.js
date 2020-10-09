@@ -10,6 +10,7 @@ import CartItem from "../../components/CartItem";
 import "./cart.css";
 import { useTranslation } from "react-i18next";
 import { setOrderInfoToDb, getAllOrders } from "../../actions/order";
+import SuccessModal from "../Modal/successModal";
 
 const Cart = ({
   cleanCart,
@@ -26,12 +27,12 @@ const Cart = ({
   const createOrder = () => {
     let totalOrderPrice = 0;
     productsAddedToCart.forEach((product) => {
-      totalOrderPrice += product.totalPriceForOneProduct 
+      totalOrderPrice += product.totalPriceForOneProduct;
     });
     let orderParams = {
       products_hash: productsAddedToCart,
       client_id: currentLoginClientId,
-      total_order_price: totalOrderPrice
+      total_order_price: totalOrderPrice,
     };
     setOrderInfoToDb(orderParams);
   };
@@ -71,6 +72,7 @@ const Cart = ({
       <button className="btn btn-danger remove_all" onClick={() => cleanCart()}>
         {t("cleanAll")}
       </button>
+      <SuccessModal />
     </Fragment>
   );
 };

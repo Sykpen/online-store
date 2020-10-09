@@ -20,6 +20,7 @@ const resources = {
       login: "Login",
       logout: "Logout",
       makeOrder: "Order",
+      clientProfile: "Client Profile",
       cardText:
         "Best pizzas in town. {{price}} only. Harry up. The offer is limited ({{amount}} left).",
     },
@@ -42,6 +43,7 @@ const resources = {
       login: "Войти",
       logout: "Выйти",
       makeOrder: "Заказать",
+      clientProfile: "Личный кабинет",
       cardText:
         "Изысканая пицца по доступной цене. Всего {{price}} рублей. Успей купить. Предложение ограничено (осталось {{amount}} штук).",
     },

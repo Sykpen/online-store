@@ -1,5 +1,5 @@
 .flex_for_products {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }

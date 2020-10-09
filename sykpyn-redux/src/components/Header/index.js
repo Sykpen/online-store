@@ -4,38 +4,68 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { loginClient, logoutClient } from "../../actions/authorization";
+import { Route, Redirect, useHistory } from "react-router-dom";
 
-function Header({ loginClient, logoutClient }) {
+function Header({ loginClient, logoutClient, currentLoginClientId }) {
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
   };
 
+  let history = useHistory();
+
+  const redirect = () => {
+    history.push("/login");
+  };
+
   return (
-    <Navbar bg="light" variant="light">
-      <Navbar.Brand href="#home">LOGO</Navbar.Brand>
-      <Nav className="mr-auto">
-        <Link to="/">Главная</Link>
-        <Link to="/contacts">{t("contacts")}</Link>
+    <Navbar bg="light" variant="light" sticky="top" expand="md">
+      <Navbar.Brand href="#home">
+        <img
+          className="logo"
+          src="https://image.flaticon.com/icons/png/512/27/27305.png"
+        ></img>
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Link className="link" to="/">
+            Главная
+          </Link>
+          <Link className="link" to="/contacts">
+            {t("contacts")}
+          </Link>
+          <Link className="link" to="/client_profile">
+            {t("clientProfile")}
+          </Link>
+        </Nav>
         <Button variant="outline-primary" onClick={() => changeLanguage("ru")}>
           RU
         </Button>
         <Button variant="outline-primary" onClick={() => changeLanguage("en")}>
           EN
         </Button>
-      </Nav>
-      <Button variant="outline-primary">{t("search")}</Button>
-      <Button variant="outline-primary" onClick={() => loginClient()}>
-        {t("login")}
-      </Button>
-      <Button variant="outline-primary" onClick={() => logoutClient()}>
-        {t("logout")}
-      </Button>
+        {currentLoginClientId ? (
+          <Button variant="outline-primary" onClick={() => logoutClient()}>
+            {t("logout")}
+          </Button>
+        ) : (
+          <Button variant="outline-primary" onClick={redirect}>
+            {t("login")}
+          </Button>
+        )}
+      </Navbar.Collapse>
     </Navbar>
   );
 }
 
+const mapStateToProps = (state) => {
+  return {
+    currentLoginClientId: state.authorization.currentLoginClientId,
+  };
+};
+
 const mapDispatchToProps = { loginClient, logoutClient };
 
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

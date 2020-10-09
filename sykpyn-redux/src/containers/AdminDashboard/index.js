@@ -8,8 +8,9 @@ import { addNewProduct } from "../../actions/admin";
 import { connect } from "react-redux";
 import ProductsForAdminPage from "../ProductsForAdminPage";
 import "./style.css";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 import ProductChangeModal from "../Modal/updateProductModal";
+import ClientsList from "../ClientsList";
 
 class AdminDashboard extends React.Component {
   componentDidMount() {
@@ -51,15 +52,66 @@ class AdminDashboard extends React.Component {
   render() {
     return (
       <Fragment>
-        <div className="flex_for_products">
-          <ProductsForAdminPage />
-        </div>
-        <div>Clients List
-            
-        </div>
-        <div>
-          <h1>New Product</h1>
-          <form>
+        <div className="container">
+          <h3>Product list</h3>
+          <div className="flex_for_products">
+            <ProductsForAdminPage />
+          </div>
+          <div>
+            <h3>Clients List</h3>
+            <ClientsList />
+          </div>
+          <div>
+            <h3>New Product</h3>
+            <Form>
+              <Form.Group controlId="formGroupEmail">
+                <Form.Label>Enter product title</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your deposit"
+                  name="title"
+                  onChange={this.handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formGroupEmail">
+                <Form.Label>Enter product titleEN</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your deposit"
+                  name="titleEN"
+                  onChange={this.handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formGroupEmail">
+                <Form.Label>Enter product price</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your deposit"
+                  name="price"
+                  onChange={this.handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formGroupEmail">
+                <Form.Label>Enter product amount</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your deposit"
+                  name="amount"
+                  onChange={this.handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formGroupEmail">
+                <Form.Label>Enter product image</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your deposit"
+                  name="image"
+                  onChange={this.handleInputChange}
+                />
+              </Form.Group>
+              <Button onClick={this.handleSubmit}>Create Product</Button>
+            </Form>
+            {/* <form>
             <p>
               <label for="title">Title</label>
               <input
@@ -108,26 +160,27 @@ class AdminDashboard extends React.Component {
             <p>
               <input type="submit" onClick={this.handleSubmit} />
             </p>
-          </form>
+          </form> */}
+          </div>
+          <ProductChangeModal />
+          <Modal
+            show={this.props.showSuccessModal}
+            onHide={() => this.props.closeSuccessModal()}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Report</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Well done, you made it!!!</Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                onClick={() => this.props.closeSuccessModal()}
+              >
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
-        <ProductChangeModal />
-        <Modal
-          show={this.props.showSuccessModal}
-          onHide={() => this.props.closeSuccessModal()}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Report</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Well done, you made it!!!</Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={() => this.props.closeSuccessModal()}
-            >
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
       </Fragment>
     );
   }

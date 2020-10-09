@@ -14,7 +14,13 @@ class Order extends Component {
 
     return (
       <Fragment>
-        <Card style={{ width: "18rem", marginTop: "10px" }}>
+        <Card
+          style={{
+            width: "18rem",
+            marginTop: "10px",
+            border: "1px solid #f8f8f8}",
+          }}
+        >
           <Card.Img className="imageInOrderHistory" variant="top" src={image} />
           <Card.Body>
             <Card.Title>{title}</Card.Title>

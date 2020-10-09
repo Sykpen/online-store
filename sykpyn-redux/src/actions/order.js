@@ -1,5 +1,6 @@
 import { ApiHelper } from "../helpers";
 import { SET_CURRENT_CLIENT_ORDERS } from "../constants";
+import { showSuccessModal } from "../actions/modal";
 
 export const setOrderInfoToDb = (newOrder) => {
   console.log(newOrder);
@@ -7,7 +8,7 @@ export const setOrderInfoToDb = (newOrder) => {
     ApiHelper.post("orders", newOrder)
       .then((response) => response.json())
       .then((parsedResponse) => {
-        console.log(parsedResponse);
+        dispatch(showSuccessModal());
       });
   };
 };
