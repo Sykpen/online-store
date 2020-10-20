@@ -1,4 +1,4 @@
-import { SET_CURRENT_CLIENT_DATA } from "../constants";
+import { SET_CURRENT_CLIENT_DATA, SET_CLIENTS } from "../constants";
 
 const initialState = {
   id: "",
@@ -10,10 +10,16 @@ const initialState = {
   nick_name: "",
   balance: "",
   bonus: "",
+  clientsList: [],
 };
 
 export const ClientReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_CLIENTS:
+      return {
+        ...state,
+        clientsList: action.clients,
+      };
     case SET_CURRENT_CLIENT_DATA:
       return {
         ...state,

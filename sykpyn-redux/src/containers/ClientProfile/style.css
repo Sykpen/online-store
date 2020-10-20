@@ -9,15 +9,15 @@
 
 .profile_info_wrapper {
   width: 300px;
+  height: 690px;
   text-align: center;
-  background-color: #f8f8f8;
+  background-color: white;
   padding: 25px;
   border-radius: 5px;
 }
 
 .profile_page_wrapper {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   margin-top: 25px;
 }
@@ -37,4 +37,25 @@
   padding: 25px;
   background-color: #f8f8f8;
   border-radius: 5px;
+}
+
+.imageInOrderHistory {
+  width: 31%;
+  height: 70px;
+  object-fit: contain;
+}
+
+.test {
+  padding: 25px;
+  margin-bottom: 20px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.repeat_order_button {
+  margin: 0 auto;
+  margin-top: 20px;
 }

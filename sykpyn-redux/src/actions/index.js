@@ -7,8 +7,10 @@ import {
   RECEIVE_PPODUCTS,
   FILTER_PRODUCTS,
   SET_CURRENT_CLIENT_DATA,
+  SET_CLIENTS,
 } from "../constants";
 import { ApiHelper } from "../helpers";
+import { getAllOrdersForCurrentClient } from "./order";
 
 export const fetchProducts = () => {
   return (dispatch) => {
@@ -24,6 +26,19 @@ function receiveProducts(json) {
     products: json.products,
   };
 }
+
+export const getClientsList = () => {
+  return (dispatch) => {
+    ApiHelper.get("clients")
+      .then((response) => response.json())
+      .then((parsedResponse) => dispatch(receiveClients(parsedResponse)));
+  };
+};
+
+export const receiveClients = (clients) => ({
+  type: SET_CLIENTS,
+  clients: clients,
+});
 
 export const addToCart = (id) => ({ type: ADD_TO_CART, productID: id });
 export const cleanCart = () => ({ type: CLEAN_CART });
@@ -47,6 +62,7 @@ export const getCurrentClientData = (id) => {
       .then((responce) => responce.json())
       .then((data) => {
         dispatch(setCurrentClientData(data.client));
+        dispatch(getAllOrdersForCurrentClient(id));
       });
   };
 };

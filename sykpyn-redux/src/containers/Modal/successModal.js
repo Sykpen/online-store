@@ -7,9 +7,9 @@ const SuccessModal = ({ showSuccessModal, closeSuccessModal }) => {
   return (
     <Modal show={showSuccessModal} onHide={() => closeSuccessModal()}>
       <Modal.Header closeButton>
-        <Modal.Title>Report</Modal.Title>
+        <Modal.Title>Success</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Well done, you made it!!!</Modal.Body>
+      <Modal.Body>Your order successfully uploaded!</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={() => closeSuccessModal()}>
           Close

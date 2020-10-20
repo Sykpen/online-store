@@ -1,0 +1,14 @@
+body {
+  background-color: #f8f8f8;
+}
+
+.link {
+  margin-right: 10px;
+  color: #70544f;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.logo {
+  width: 60px;
+}

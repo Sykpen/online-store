@@ -12,7 +12,7 @@ import { findProductById, collectionContains } from "../helpers";
 let arrayForFilters = [];
 
 const initialState = {
-  products: null,
+  products: [],
   totalPrice: 0,
   productsAddedToCart: [],
   showCart: false,
